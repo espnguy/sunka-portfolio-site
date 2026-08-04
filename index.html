@@ -345,11 +345,31 @@
   }
 
   /* ---------- stack ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 48px;
+  }
+
   .stack-row {
-    padding: 16px 0;
+    padding: 20px 0;
     border-top: 1px solid var(--line);
   }
-  .stack-row:first-of-type { border-top: none; }
+  .stack-row:nth-child(-n+2) { border-top: none; }
+
+  .stack-label-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 9px;
+  }
+
+  .stack-icon {
+    width: 19px;
+    height: 19px;
+    color: var(--heading);
+    flex-shrink: 0;
+  }
 
   .stack-cat {
     font-size: 0.78rem;
@@ -357,8 +377,6 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--heading);
-    display: block;
-    margin-bottom: 8px;
   }
 
   .stack-items {
@@ -369,6 +387,12 @@
   .stack-items .sep {
     color: var(--gold-deep);
     margin: 0 8px;
+  }
+
+  @media (max-width: 640px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .stack-row:nth-child(-n+2) { border-top: 1px solid var(--line); }
+    .stack-row:first-child { border-top: none; }
   }
 
   /* ---------- credentials ---------- */
@@ -570,29 +594,49 @@
     <h2 class="section-head">Skills</h2>
     <span class="section-kicker">Tools and platforms, by category</span>
 
-    <div class="stack-row">
-      <span class="stack-cat">Cloud</span>
-      <div class="stack-items">AWS<span class="sep">·</span>Azure<span class="sep">·</span>Google Cloud</div>
-    </div>
-    <div class="stack-row">
-      <span class="stack-cat">SRE &amp; Reliability</span>
-      <div class="stack-items">SLO/SLI<span class="sep">·</span>Incident Management<span class="sep">·</span>Root Cause Analysis<span class="sep">·</span>Disaster Recovery<span class="sep">·</span>Chaos Engineering<span class="sep">·</span>Runbook Authoring</div>
-    </div>
-    <div class="stack-row">
-      <span class="stack-cat">IaC &amp; Automation</span>
-      <div class="stack-items">Terraform<span class="sep">·</span>ARM Templates<span class="sep">·</span>Ansible<span class="sep">·</span>PowerShell<span class="sep">·</span>Python<span class="sep">·</span>Bash</div>
-    </div>
-    <div class="stack-row">
-      <span class="stack-cat">Containers &amp; CI/CD</span>
-      <div class="stack-items">Kubernetes (GKE)<span class="sep">·</span>Docker<span class="sep">·</span>Jenkins<span class="sep">·</span>Azure DevOps<span class="sep">·</span>Git / GitHub</div>
-    </div>
-    <div class="stack-row">
-      <span class="stack-cat">Observability</span>
-      <div class="stack-items">Splunk<span class="sep">·</span>LogicMonitor<span class="sep">·</span>ThousandEyes<span class="sep">·</span>Application Insights<span class="sep">·</span>CloudWatch<span class="sep">·</span>Prometheus / Grafana</div>
-    </div>
-    <div class="stack-row">
-      <span class="stack-cat">Security &amp; Compliance</span>
-      <div class="stack-items">Snyk<span class="sep">·</span>Wiz<span class="sep">·</span>HashiCorp Vault<span class="sep">·</span>PCI DSS<span class="sep">·</span>Azure Key Vault<span class="sep">·</span>GCP Secret Manager</div>
+    <div class="skills-grid">
+      <div class="stack-row">
+        <div class="stack-label-row">
+          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.6-7.96 5 5 0 0 1 9.6-1.54A4.5 4.5 0 0 1 17.5 18H7z"/></svg>
+          <span class="stack-cat">Cloud</span>
+        </div>
+        <div class="stack-items">AWS<span class="sep">·</span>Azure<span class="sep">·</span>Google Cloud</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label-row">
+          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4-5"/><circle cx="12" cy="15" r="1"/></svg>
+          <span class="stack-cat">SRE &amp; Reliability</span>
+        </div>
+        <div class="stack-items">SLO/SLI<span class="sep">·</span>Incident Management<span class="sep">·</span>Root Cause Analysis<span class="sep">·</span>Disaster Recovery<span class="sep">·</span>Chaos Engineering<span class="sep">·</span>Runbook Authoring</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label-row">
+          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>
+          <span class="stack-cat">IaC &amp; Automation</span>
+        </div>
+        <div class="stack-items">Terraform<span class="sep">·</span>ARM Templates<span class="sep">·</span>Ansible<span class="sep">·</span>PowerShell<span class="sep">·</span>Python<span class="sep">·</span>Bash</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label-row">
+          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3"/><path d="M20 12a8 8 0 0 1-14 5.3"/><path d="M16 4v3.3h-3.3"/><path d="M8 20v-3.3h3.3"/></svg>
+          <span class="stack-cat">Containers &amp; CI/CD</span>
+        </div>
+        <div class="stack-items">Kubernetes (GKE)<span class="sep">·</span>Docker<span class="sep">·</span>Jenkins<span class="sep">·</span>Azure DevOps<span class="sep">·</span>Git / GitHub</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label-row">
+          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 16.5l4.5-6 4 3.5 5-8 3.5 4.5"/></svg>
+          <span class="stack-cat">Observability</span>
+        </div>
+        <div class="stack-items">Splunk<span class="sep">·</span>LogicMonitor<span class="sep">·</span>ThousandEyes<span class="sep">·</span>Application Insights<span class="sep">·</span>CloudWatch<span class="sep">·</span>Prometheus / Grafana</div>
+      </div>
+      <div class="stack-row">
+        <div class="stack-label-row">
+          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/></svg>
+          <span class="stack-cat">Security &amp; Compliance</span>
+        </div>
+        <div class="stack-items">Snyk<span class="sep">·</span>Wiz<span class="sep">·</span>HashiCorp Vault<span class="sep">·</span>PCI DSS<span class="sep">·</span>Azure Key Vault<span class="sep">·</span>GCP Secret Manager</div>
+      </div>
     </div>
   </section>
 
