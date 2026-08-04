@@ -1,0 +1,558 @@
+<title>Mustafa F. Sunka — Senior DevSecOps Engineer</title>
+<style>
+  :root {
+    --bg: #f0eada;
+    --panel: #f7f2e6;
+    --ink: #111111;
+    --ink-dim: #5b4c63;
+    --ink-faint: #8c7f8f;
+    --purple: #461d7c;
+    --purple-deep: #341460;
+    --gold: #fdd023;
+    --gold-deep: #a9840a;
+    --line: #e0d5c3;
+
+    --heading: var(--purple);
+    --rule: var(--gold);
+    --btn-bg: var(--purple);
+    --btn-bg-hover: var(--purple-deep);
+    --btn-ink: #f7f1e4;
+    --btn-ghost-border: var(--purple);
+    --badge-bg: var(--gold);
+    --badge-ink: var(--purple-deep);
+
+    --font-display: Constantia, Georgia, "Times New Roman", serif;
+    --font-body: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1b1024;
+      --panel: #241531;
+      --ink: #f0eada;
+      --ink-dim: #c7b7d3;
+      --ink-faint: #93839f;
+      --purple: #a37fce;
+      --purple-deep: #7c5aa8;
+      --gold: #fdd023;
+      --gold-deep: #fdd023;
+      --line: #3a2748;
+
+      --heading: var(--gold);
+      --rule: var(--gold);
+      --btn-bg: var(--gold);
+      --btn-bg-hover: #e8bc12;
+      --btn-ink: #2a1240;
+      --btn-ghost-border: var(--gold);
+      --badge-bg: var(--gold);
+      --badge-ink: #2a1240;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #1b1024;
+    --panel: #241531;
+    --ink: #f0eada;
+    --ink-dim: #c7b7d3;
+    --ink-faint: #93839f;
+    --purple: #a37fce;
+    --purple-deep: #7c5aa8;
+    --gold: #fdd023;
+    --gold-deep: #fdd023;
+    --line: #3a2748;
+
+    --heading: var(--gold);
+    --rule: var(--gold);
+    --btn-bg: var(--gold);
+    --btn-bg-hover: #e8bc12;
+    --btn-ink: #2a1240;
+    --btn-ghost-border: var(--gold);
+    --badge-bg: var(--gold);
+    --badge-ink: #2a1240;
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f0eada;
+    --panel: #f7f2e6;
+    --ink: #111111;
+    --ink-dim: #5b4c63;
+    --ink-faint: #8c7f8f;
+    --purple: #461d7c;
+    --purple-deep: #341460;
+    --gold: #fdd023;
+    --gold-deep: #a9840a;
+    --line: #e0d5c3;
+
+    --heading: var(--purple);
+    --rule: var(--gold);
+    --btn-bg: var(--purple);
+    --btn-bg-hover: var(--purple-deep);
+    --btn-ink: #f7f1e4;
+    --btn-ghost-border: var(--purple);
+    --badge-bg: var(--gold);
+    --badge-ink: var(--purple-deep);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold-deep);
+    outline-offset: 3px;
+  }
+
+  ::selection { background: var(--gold); color: var(--purple-deep); }
+
+  h1, h2, h3 { font-family: var(--font-display); color: var(--heading); }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--heading);
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    padding: 46px 0 22px;
+    text-align: center;
+  }
+
+  .masthead .name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--heading);
+    margin: 0;
+  }
+
+  .masthead .role {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+
+  .masthead .rule {
+    width: 64px;
+    height: 3px;
+    background: var(--rule);
+    margin: 18px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 40px 0 8px; text-align: center; }
+
+  .hero .eyebrow { display: block; margin-bottom: 18px; }
+
+  .hero h1 {
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 2.7rem);
+    line-height: 1.18;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+    color: var(--ink-dim);
+    max-width: 56ch;
+    margin: 0 auto 32px;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 3px;
+    border: 1.5px solid transparent;
+    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+  }
+
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn-primary { background: var(--btn-bg); color: var(--btn-ink); }
+  .btn-primary:hover { background: var(--btn-bg-hover); }
+
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--btn-ghost-border); }
+  .btn-ghost:hover { border-color: var(--gold-deep); color: var(--heading); }
+
+  /* ---------- stat ribbon ---------- */
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    margin: 56px 0;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat {
+    flex: 1 1 190px;
+    max-width: 220px;
+    text-align: center;
+    padding: 10px 16px;
+    border-left: 1px solid var(--line);
+  }
+  .stat:first-child { border-left: none; }
+
+  .stat .figure {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.9rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--heading);
+    line-height: 1;
+  }
+
+  .stat .label {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--ink-dim);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .stat { flex: 1 1 45%; border-left: none; border-top: 1px solid var(--line); padding-top: 18px; }
+    .stat:nth-child(-n+2) { border-top: none; }
+  }
+
+  /* ---------- section heads ---------- */
+  .section-head {
+    text-align: center;
+    margin: 0 0 6px;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .section-kicker {
+    display: block;
+    text-align: center;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+    margin-bottom: 38px;
+  }
+
+  section.experience, section.stack, section.creds { margin-top: 64px; }
+
+  /* ---------- experience ---------- */
+  .entry {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-top: 1px solid var(--line);
+  }
+  .entry:first-of-type { border-top: none; }
+
+  .entry-time {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+    padding-top: 3px;
+  }
+
+  .entry-body h3 {
+    margin: 0 0 4px;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .entry-org {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-style: normal;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+  }
+
+  .entry-body ul {
+    margin: 14px 0 0;
+    padding-left: 18px;
+  }
+
+  .entry-body li { margin-bottom: 8px; font-size: 0.96rem; color: var(--ink); }
+  .entry-body li::marker { color: var(--gold-deep); }
+
+  .entry-note {
+    margin: 14px 0 0;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 600px) {
+    .entry { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* ---------- stack ---------- */
+  .stack-row {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .stack-row:first-of-type { border-top: none; }
+
+  .stack-cat {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--heading);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .stack-items {
+    font-size: 0.97rem;
+    color: var(--ink);
+  }
+
+  .stack-items .sep {
+    color: var(--gold-deep);
+    margin: 0 8px;
+  }
+
+  /* ---------- credentials ---------- */
+  .creds {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .creds ul { margin: 0; padding: 0; list-style: none; }
+  .creds li {
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-size: 0.93rem;
+    color: var(--ink-dim);
+  }
+  .creds li:first-of-type { border-top: none; }
+  .creds li strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
+
+  @media (max-width: 600px) {
+    .creds { grid-template-columns: 1fr; gap: 36px; }
+  }
+
+  /* ---------- footer ---------- */
+  footer.contact {
+    margin-top: 70px;
+    padding-top: 44px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--badge-bg);
+    color: var(--badge-ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+
+  .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-dim);
+    max-width: 46ch;
+    margin: 0 auto 36px;
+    text-wrap: balance;
+  }
+
+  .contact-line {
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+    margin-bottom: 30px;
+  }
+
+  .contact-line a { text-decoration: none; }
+  .contact-line a:hover { color: var(--heading); }
+
+  .contact-line .sep { color: var(--gold-deep); margin: 0 10px; }
+
+  .footer-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+</style>
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="name">MUSTAFA F. SUNKA</p>
+    <p class="role">Senior DevSecOps Engineer</p>
+    <div class="rule"></div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">8+ Years · AWS · Azure · GCP</span>
+    <h1>Infrastructure that holds up —<br>under load, and under audit.</h1>
+    <p class="lede">I design and operate highly available cloud infrastructure for organizations that can't afford downtime or a failed audit. The work is mostly unglamorous: Terraform modules, runbooks, and alerting that catches a problem before a customer does. I've also been trusted to mentor the engineers who'll do it after me.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="https://github.com/espnguy/portfolio">View Portfolio →</a>
+      <a class="btn btn-ghost" href="https://github.com/espnguy">GitHub Profile</a>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Impact metrics">
+    <div class="stat">
+      <div class="figure">99.9%</div>
+      <div class="label">availability sustained across 20+ critical services</div>
+    </div>
+    <div class="stat">
+      <div class="figure">75%</div>
+      <div class="label">cut in provisioning time via reusable Terraform modules</div>
+    </div>
+    <div class="stat">
+      <div class="figure">75%</div>
+      <div class="label">reduction in downtime from unified observability</div>
+    </div>
+    <div class="stat">
+      <div class="figure">40%</div>
+      <div class="label">faster incident detection via Splunk &amp; LogicMonitor</div>
+    </div>
+    <div class="stat">
+      <div class="figure">65%</div>
+      <div class="label">faster recovery — automated DR runbooks, 2-hr RTO</div>
+    </div>
+    <div class="stat">
+      <div class="figure">100%</div>
+      <div class="label">compliance sustained across 3 straight audit cycles</div>
+    </div>
+    <div class="stat">
+      <div class="figure">500+</div>
+      <div class="label">endpoints under continuous monitoring</div>
+    </div>
+    <div class="stat">
+      <div class="figure">40+</div>
+      <div class="label">security controls embedded into IaC pipelines</div>
+    </div>
+  </section>
+
+  <section class="experience">
+    <h2 class="section-head">Experience</h2>
+    <span class="section-kicker">Thirteen years, one company, five roles</span>
+
+    <article class="entry">
+      <div class="entry-time">Feb 2013 —<br>Present</div>
+      <div class="entry-body">
+        <h3>Senior DevSecOps Engineer <span class="entry-org">· Global Payments, Dallas, TX</span></h3>
+        <ul>
+          <li>Defined and enforced SLOs/SLIs for 20+ critical services across AWS, Azure, and GCP, holding 99.9% availability.</li>
+          <li>Led incident detection and root-cause analysis for a high-throughput production platform, cutting mean time to detect by 40%.</li>
+          <li>Engineered reusable, policy-as-code Terraform modules that cut deployment cycle time by 75%.</li>
+          <li>Built disaster recovery playbooks with a 2-hour RTO, cutting mean time to recover by 65%.</li>
+          <li>Embedded security scanning and secrets management into CI/CD, eliminating hardcoded credentials across every environment.</li>
+          <li>Mentored four junior engineers — one internal promotion, 30% faster onboarding for new hires.</li>
+        </ul>
+        <p class="entry-note">Five roles at Global Payments: Technical Support Representative → Account Manager → Data Analyst → DevOps Engineer → Senior DevSecOps Engineer.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-time">2005 —<br>2013</div>
+      <div class="entry-body">
+        <h3>Operations Manager <span class="entry-org">· Best Buy, Hammond, LA</span></h3>
+        <ul>
+          <li>Ran a 20-person team at a $10M+ revenue location, lifting customer satisfaction 18% while cutting attrition.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section class="stack">
+    <h2 class="section-head">Skills</h2>
+    <span class="section-kicker">Tools and platforms, by category</span>
+
+    <div class="stack-row">
+      <span class="stack-cat">Cloud</span>
+      <div class="stack-items">AWS<span class="sep">·</span>Azure<span class="sep">·</span>Google Cloud</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">SRE &amp; Reliability</span>
+      <div class="stack-items">SLO/SLI<span class="sep">·</span>Incident Management<span class="sep">·</span>Root Cause Analysis<span class="sep">·</span>Disaster Recovery<span class="sep">·</span>Chaos Engineering<span class="sep">·</span>Runbook Authoring</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">IaC &amp; Automation</span>
+      <div class="stack-items">Terraform<span class="sep">·</span>ARM Templates<span class="sep">·</span>Ansible<span class="sep">·</span>PowerShell<span class="sep">·</span>Python<span class="sep">·</span>Bash</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">Containers &amp; CI/CD</span>
+      <div class="stack-items">Kubernetes (GKE)<span class="sep">·</span>Docker<span class="sep">·</span>Jenkins<span class="sep">·</span>Azure DevOps<span class="sep">·</span>Git / GitHub</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">Observability</span>
+      <div class="stack-items">Splunk<span class="sep">·</span>LogicMonitor<span class="sep">·</span>ThousandEyes<span class="sep">·</span>Application Insights<span class="sep">·</span>CloudWatch<span class="sep">·</span>Prometheus / Grafana</div>
+    </div>
+    <div class="stack-row">
+      <span class="stack-cat">Security &amp; Compliance</span>
+      <div class="stack-items">Snyk<span class="sep">·</span>Wiz<span class="sep">·</span>HashiCorp Vault<span class="sep">·</span>PCI DSS<span class="sep">·</span>Azure Key Vault<span class="sep">·</span>GCP Secret Manager</div>
+    </div>
+  </section>
+
+  <section class="creds">
+    <div class="creds-col">
+      <h2 class="section-head" style="text-align:left; font-size:1.15rem;">Certifications</h2>
+      <ul>
+        <li><strong>Microsoft Certified: Azure Administrator Associate</strong></li>
+        <li><strong>Microsoft Azure Fundamentals</strong></li>
+        <li><strong>Google Cloud Foundational</strong></li>
+        <li><strong>SAS Institute Graduate Certificate</strong>Business Intelligence &amp; Data Mining</li>
+      </ul>
+    </div>
+    <div class="creds-col">
+      <h2 class="section-head" style="text-align:left; font-size:1.15rem;">Education</h2>
+      <ul>
+        <li><strong>M.S., Information Technology Management</strong>University of Texas at Dallas — 2018</li>
+        <li><strong>B.A., Mass Communication</strong>Louisiana State University — 2010</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="contact">
+    <div class="badge">Global Circle of Excellence</div>
+    <p class="quote">"Recognized for building resilient, observable infrastructure at scale."</p>
+    <div class="contact-line">
+      Frisco, TX<span class="sep">·</span><a href="tel:+12257475703">225-747-5703</a><span class="sep">·</span><a href="mailto:msunka@me.com">msunka@me.com</a>
+    </div>
+    <div class="footer-ctas">
+      <a class="btn btn-primary" href="https://github.com/espnguy/portfolio">Portfolio ↗</a>
+      <a class="btn btn-ghost" href="https://github.com/espnguy">GitHub ↗</a>
+    </div>
+  </footer>
+
+</div>
