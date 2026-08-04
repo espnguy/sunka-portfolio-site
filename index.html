@@ -407,6 +407,19 @@
 
   .contact-line .sep { color: var(--gold-deep); margin: 0 10px; }
 
+  .contact-btn {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  .contact-btn:hover { color: var(--heading); text-decoration-color: var(--gold-deep); }
+
   .footer-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 </style>
 
@@ -547,7 +560,7 @@
     <div class="badge">Global Circle of Excellence</div>
     <p class="quote">"Recognized for building resilient, observable infrastructure at scale."</p>
     <div class="contact-line">
-      Frisco, TX<span class="sep">·</span><a href="tel:+12257475703">225-747-5703</a><span class="sep">·</span><a href="mailto:msunka@me.com">msunka@me.com</a>
+      Frisco, TX<span class="sep">·</span><button type="button" class="contact-btn" data-tel="KzEyMjU3NDc1NzAz">Call</button><span class="sep">·</span><button type="button" class="contact-btn" data-mail="bXN1bmthQG1lLmNvbQ==">Email</button>
     </div>
     <div class="footer-ctas">
       <a class="btn btn-primary" href="https://github.com/espnguy/portfolio">Portfolio ↗</a>
@@ -556,3 +569,16 @@
   </footer>
 
 </div>
+
+<script>
+  document.querySelectorAll("[data-mail]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      window.location.href = "mailto:" + atob(el.dataset.mail);
+    });
+  });
+  document.querySelectorAll("[data-tel]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      window.location.href = "tel:" + atob(el.dataset.tel);
+    });
+  });
+</script>
