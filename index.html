@@ -1,4 +1,17 @@
 <title>Mustafa F. Sunka — Senior DevSecOps Engineer</title>
+<meta name="description" content="Senior DevSecOps Engineer with 8+ years building highly available cloud infrastructure across AWS, Azure, and GCP — SRE, IaC, security automation, and compliance.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mustafa F. Sunka — Senior DevSecOps Engineer">
+<meta property="og:description" content="8+ years building highly available cloud infrastructure across AWS, Azure, and GCP — SRE, IaC, security automation, and compliance.">
+<meta property="og:image" content="https://mustafasunka.dev/og-image.png">
+<meta property="og:url" content="https://mustafasunka.dev/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mustafa F. Sunka — Senior DevSecOps Engineer">
+<meta name="twitter:description" content="8+ years building highly available cloud infrastructure across AWS, Azure, and GCP — SRE, IaC, security automation, and compliance.">
+<meta name="twitter:image" content="https://mustafasunka.dev/og-image.png">
 <style>
   :root {
     --bg: #f0eada;
@@ -264,7 +277,29 @@
     margin-bottom: 38px;
   }
 
-  section.experience, section.stack, section.creds { margin-top: 64px; }
+  section.experience, section.work, section.stack, section.creds { margin-top: 64px; }
+
+  /* ---------- selected work ---------- */
+  .work-item {
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .work-item:first-of-type { border-top: none; }
+
+  .work-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
+  .work-item h3 a {
+    color: var(--heading);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+  }
+  .work-item h3 a:hover { color: var(--gold-deep); }
+
+  .work-item p {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-dim);
+    max-width: 62ch;
+  }
 
   /* ---------- experience ---------- */
   .entry {
@@ -438,6 +473,7 @@
     <div class="hero-ctas">
       <a class="btn btn-primary" href="https://github.com/espnguy/portfolio">View Portfolio →</a>
       <a class="btn btn-ghost" href="https://github.com/espnguy">GitHub Profile</a>
+      <a class="btn btn-ghost" href="/resume.pdf" download>Download Résumé ↓</a>
     </div>
   </section>
 
@@ -505,6 +541,24 @@
         </ul>
       </div>
     </article>
+  </section>
+
+  <section class="work">
+    <h2 class="section-head">Selected Work</h2>
+    <span class="section-kicker">From the portfolio repository</span>
+
+    <div class="work-item">
+      <h3><a href="https://github.com/espnguy/portfolio/tree/main/08-devsecops-pipeline">DevSecOps Security Pipeline</a></h3>
+      <p>A four-gate GitHub Actions pipeline — secrets scanning, SAST, dependency checks, and policy enforcement — that stops insecure code before it reaches production.</p>
+    </div>
+    <div class="work-item">
+      <h3><a href="https://github.com/espnguy/portfolio/tree/main/11-pci-compliance">PCI DSS Compliance-as-Code</a></h3>
+      <p>Automated PCI DSS v4.0 scanning with Checkov and OPA, wired into CI/CD so audit evidence is generated on every push instead of scrambled together once a year.</p>
+    </div>
+    <div class="work-item">
+      <h3><a href="https://github.com/espnguy/portfolio/tree/main/09-observability">Observability Stack — Prometheus + Grafana</a></h3>
+      <p>A fully instrumented Flask service with Prometheus metrics and Grafana alerting tied to SLO thresholds — the same pattern I run in production.</p>
+    </div>
   </section>
 
   <section class="stack">
