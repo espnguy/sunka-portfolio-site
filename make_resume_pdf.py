@@ -11,16 +11,14 @@ from reportlab.platypus import (
 
 OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "resume.pdf")
 
-PURPLE = colors.HexColor("#461D7C")
-GOLD = colors.HexColor("#FDD023")
 INK = colors.HexColor("#171717")
 INK_DIM = colors.HexColor("#444444")
-LINE = colors.HexColor("#D8D0C8")
+LINE = colors.HexColor("#CCCCCC")
 
 styles = {
-    "name": ParagraphStyle("name", fontName="Times-Bold", fontSize=21, textColor=PURPLE, leading=22, spaceAfter=0),
+    "name": ParagraphStyle("name", fontName="Times-Bold", fontSize=21, textColor=INK, leading=22, spaceAfter=0),
     "contact": ParagraphStyle("contact", fontName="Helvetica", fontSize=9.1, textColor=INK_DIM, spaceAfter=4),
-    "h2": ParagraphStyle("h2", fontName="Times-Bold", fontSize=11, textColor=PURPLE, spaceBefore=7, spaceAfter=2,
+    "h2": ParagraphStyle("h2", fontName="Times-Bold", fontSize=11, textColor=INK, spaceBefore=7, spaceAfter=2,
                           leading=13),
     "summary": ParagraphStyle("summary", fontName="Helvetica", fontSize=9.4, textColor=INK, leading=12.3, alignment=TA_LEFT),
     "role_title": ParagraphStyle("role_title", fontName="Helvetica-Bold", fontSize=10.1, textColor=INK, spaceBefore=5, leading=11.5),
@@ -54,7 +52,7 @@ def role_header(title, org, dates):
 
 def bullets(items):
     return ListFlowable(
-        [ListItem(Paragraph(i, styles["bullet"]), leftIndent=14, bulletColor=GOLD) for i in items],
+        [ListItem(Paragraph(i, styles["bullet"]), leftIndent=14, bulletColor=INK) for i in items],
         bulletType="bullet", start="•", leftIndent=14, bulletFontSize=9,
     )
 
@@ -69,7 +67,7 @@ doc = SimpleDocTemplate(
 story = []
 story.append(Paragraph("Mustafa F. Sunka", styles["name"]))
 story.append(Paragraph("Frisco, TX &nbsp;&middot;&nbsp; 225-747-5703 &nbsp;&middot;&nbsp; msunka@me.com", styles["contact"]))
-story.append(HRFlowable(width="100%", thickness=2.5, color=GOLD, spaceAfter=10))
+story.append(HRFlowable(width="100%", thickness=1, color=colors.HexColor("#999999"), spaceAfter=10))
 
 story += h2("Professional Summary")
 story.append(Paragraph(
@@ -112,7 +110,7 @@ skill_lines = [
     ("Security &amp; Compliance", "Snyk · Wiz · HashiCorp Vault · PCI DSS · Azure Key Vault · GCP Secret Manager"),
 ]
 for label, val in skill_lines:
-    story.append(Paragraph(f'<font color="#461D7C"><b>{label}:</b></font> {val}', styles["skill"]))
+    story.append(Paragraph(f'<b>{label}:</b> {val}', styles["skill"]))
 
 story += h2("Certifications")
 cert_table = Table([
