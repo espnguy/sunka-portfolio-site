@@ -1,691 +1,2011 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mustafa F. Sunka — Senior DevSecOps Engineer</title>
-<meta name="description" content="Senior DevSecOps Engineer with 8+ years building highly available cloud infrastructure across AWS, Azure, and GCP — SRE, IaC, security automation, and compliance.">
+<meta name="description" content="Senior DevSecOps Engineer with 8+ years keeping payment infrastructure at 99.9% availability across AWS, Azure, and GCP — and passing every compliance audit along the way.">
+<meta name="theme-color" content="#0E0B14">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Mustafa F. Sunka — Senior DevSecOps Engineer">
-<meta property="og:description" content="8+ years building highly available cloud infrastructure across AWS, Azure, and GCP — SRE, IaC, security automation, and compliance.">
+<meta property="og:description" content="Infrastructure that holds up — under load, and under audit. 8+ years across AWS, Azure, and GCP.">
 <meta property="og:image" content="https://mustafasunka.dev/og-image.png">
 <meta property="og:url" content="https://mustafasunka.dev/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mustafa F. Sunka — Senior DevSecOps Engineer">
-<meta name="twitter:description" content="8+ years building highly available cloud infrastructure across AWS, Azure, and GCP — SRE, IaC, security automation, and compliance.">
+<meta name="twitter:description" content="Infrastructure that holds up — under load, and under audit. 8+ years across AWS, Azure, and GCP.">
 <meta name="twitter:image" content="https://mustafasunka.dev/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- fonts load without blocking first paint; system fallbacks render immediately -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"></noscript>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Mustafa F. Sunka",
+  "jobTitle": "Senior DevSecOps Engineer",
+  "url": "https://mustafasunka.dev/",
+  "worksFor": { "@type": "Organization", "name": "Global Payments" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "The University of Texas at Dallas" },
+    { "@type": "CollegeOrUniversity", "name": "Louisiana State University" }
+  ],
+  "award": "Global Payments Circle of Excellence, 2020",
+  "address": { "@type": "PostalAddress", "addressLocality": "Frisco", "addressRegion": "TX", "addressCountry": "US" },
+  "sameAs": ["https://www.linkedin.com/in/mustafa-sunka/", "https://github.com/espnguy"]
+}
+</script>
+
+<script>
+  document.documentElement.classList.add("js");
+  try {
+    var t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+
 <style>
+  /* ================= tokens ================= */
   :root {
-    --bg: #f0eada;
-    --panel: #f7f2e6;
-    --ink: #111111;
-    --ink-dim: #5b4c63;
-    --ink-faint: #8c7f8f;
-    --purple: #461d7c;
-    --purple-deep: #341460;
-    --gold: #fdd023;
-    --gold-deep: #a9840a;
-    --line: #e0d5c3;
+    --bg: #0E0B14;
+    --surface: #17121F;
+    --surface-2: #1F1829;
+    --line: #2B2338;
+    --line-strong: #3A3049;
+    --ink: #F2EEF7;
+    --ink-dim: #B3A8C2;
+    --ink-faint: #8A7F9C;
+    --accent: #FDD023;
+    --accent-hover: #FFDE55;
+    --accent-ink: #1A1024;
+    --brand: #B08AEB;
+    --ok: #3DDC97;
+    --glow: rgba(253, 208, 35, 0.3);
+    --grid-dot: rgba(176, 138, 235, 0.16);
+    --plate: #F2EEF7;
 
-    --heading: var(--purple);
-    --rule: var(--gold);
-    --btn-bg: var(--purple);
-    --btn-bg-hover: var(--purple-deep);
-    --btn-ink: #f7f1e4;
-    --btn-ghost-border: var(--purple);
+    --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+    --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
 
-    --font-display: Constantia, Georgia, "Times New Roman", serif;
-    --font-body: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    /* type scale: 12 / 14 / 17 / 19 / 22 / display */
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1.0625rem;
+    --fs-md: 1.1875rem;
+    --fs-lg: 1.375rem;
+    --fs-h2: clamp(2rem, 4vw, 3rem);
+    --fs-h1: clamp(2.6rem, 6.4vw, 5rem);
+
+    /* spacing scale: 8-pt */
+    --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 48px; --s6: 64px; --s7: 96px;
+    --section: clamp(112px, 13vw, 176px);
+
+    --ease: cubic-bezier(.2, .7, .2, 1);
+    --max: 1120px;
+    --gutter: 32px;
+    --nav-h: 72px;
+    --radius: 16px;
+    color-scheme: dark;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1b1024;
-      --panel: #241531;
-      --ink: #f0eada;
-      --ink-dim: #c7b7d3;
-      --ink-faint: #93839f;
-      --purple: #a37fce;
-      --purple-deep: #7c5aa8;
-      --gold: #fdd023;
-      --gold-deep: #fdd023;
-      --line: #3a2748;
-
-      --heading: var(--gold);
-      --rule: var(--gold);
-      --btn-bg: var(--gold);
-      --btn-bg-hover: #e8bc12;
-      --btn-ink: #2a1240;
-      --btn-ghost-border: var(--gold);
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #F7F4EE;
+      --surface: #FFFFFF;
+      --surface-2: #F1ECF6;
+      --line: #E4DDEA;
+      --line-strong: #CFC5DA;
+      --ink: #16111D;
+      --ink-dim: #4F445D;
+      --ink-faint: #6F6480;
+      --accent: #461D7C;
+      --accent-hover: #341460;
+      --accent-ink: #FFFFFF;
+      --brand: #5B2A9E;
+      --ok: #0A7A4F;
+      --glow: rgba(70, 29, 124, 0.22);
+      --grid-dot: rgba(70, 29, 124, 0.1);
+      --plate: #FFFFFF;
+      color-scheme: light;
     }
   }
 
-  :root[data-theme="dark"] {
-    --bg: #1b1024;
-    --panel: #241531;
-    --ink: #f0eada;
-    --ink-dim: #c7b7d3;
-    --ink-faint: #93839f;
-    --purple: #a37fce;
-    --purple-deep: #7c5aa8;
-    --gold: #fdd023;
-    --gold-deep: #fdd023;
-    --line: #3a2748;
-
-    --heading: var(--gold);
-    --rule: var(--gold);
-    --btn-bg: var(--gold);
-    --btn-bg-hover: #e8bc12;
-    --btn-ink: #2a1240;
-    --btn-ghost-border: var(--gold);
-  }
-
   :root[data-theme="light"] {
-    --bg: #f0eada;
-    --panel: #f7f2e6;
-    --ink: #111111;
-    --ink-dim: #5b4c63;
-    --ink-faint: #8c7f8f;
-    --purple: #461d7c;
-    --purple-deep: #341460;
-    --gold: #fdd023;
-    --gold-deep: #a9840a;
-    --line: #e0d5c3;
-
-    --heading: var(--purple);
-    --rule: var(--gold);
-    --btn-bg: var(--purple);
-    --btn-bg-hover: var(--purple-deep);
-    --btn-ink: #f7f1e4;
-    --btn-ghost-border: var(--purple);
+    --bg: #F7F4EE;
+    --surface: #FFFFFF;
+    --surface-2: #F1ECF6;
+    --line: #E4DDEA;
+    --line-strong: #CFC5DA;
+    --ink: #16111D;
+    --ink-dim: #4F445D;
+    --ink-faint: #6F6480;
+    --accent: #461D7C;
+    --accent-hover: #341460;
+    --accent-ink: #FFFFFF;
+    --brand: #5B2A9E;
+    --ok: #0A7A4F;
+    --glow: rgba(70, 29, 124, 0.22);
+    --grid-dot: rgba(70, 29, 124, 0.1);
+    --plate: #FFFFFF;
+    color-scheme: light;
   }
 
-  * { box-sizing: border-box; }
+  /* ================= base ================= */
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + var(--s3)); }
 
   body {
     margin: 0;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-body);
-    line-height: 1.6;
+    font-size: var(--fs-base);
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-  }
-
-  .page {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
+    overflow-x: clip;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   a { color: inherit; }
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--gold-deep);
-    outline-offset: 3px;
-  }
+  img, svg { display: block; }
+  ::selection { background: #FDD023; color: #1A1024; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
-  ::selection { background: var(--gold); color: var(--purple-deep); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 
-  h1, h2, h3 { font-family: var(--font-display); color: var(--heading); }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.025em; margin: 0; line-height: 1.08; }
 
-  .eyebrow {
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
+  .label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--heading);
-  }
-
-  /* ---------- masthead ---------- */
-  .masthead {
-    padding: 46px 0 22px;
-    text-align: center;
-  }
-
-  .masthead .name {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: var(--heading);
-    margin: 0;
-  }
-
-  .masthead .role {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    color: var(--ink-dim);
-    letter-spacing: 0.04em;
-    margin-top: 4px;
-  }
-
-  .masthead .rule {
-    width: 64px;
-    height: 3px;
-    background: var(--rule);
-    margin: 18px auto 0;
-    border-radius: 2px;
-  }
-
-  /* ---------- hero ---------- */
-  .hero { padding: 40px 0 8px; text-align: center; }
-
-  .hero .eyebrow { display: block; margin-bottom: 18px; }
-
-  .hero h1 {
-    font-weight: 700;
-    font-size: clamp(2rem, 5vw, 2.7rem);
-    line-height: 1.18;
-    margin: 0 0 22px;
-    text-wrap: balance;
-  }
-
-  .lede {
-    font-size: 1.05rem;
-    color: var(--ink-dim);
-    max-width: 56ch;
-    margin: 0 auto 32px;
-  }
-
-  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.9rem;
-    text-decoration: none;
-    padding: 12px 22px;
-    border-radius: 3px;
-    border: 1.5px solid transparent;
-    transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
-  }
-
-  .btn:hover { transform: translateY(-1px); }
-
-  .btn-primary { background: var(--btn-bg); color: var(--btn-ink); }
-  .btn-primary:hover { background: var(--btn-bg-hover); }
-
-  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--btn-ghost-border); }
-  .btn-ghost:hover { border-color: var(--gold-deep); color: var(--heading); }
-
-  /* ---------- stat ribbon ---------- */
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0;
-    margin: 56px 0;
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-
-  .stat {
-    flex: 1 1 190px;
-    max-width: 220px;
-    text-align: center;
-    padding: 10px 16px;
-    border-left: 1px solid var(--line);
-  }
-  .stat:first-child { border-left: none; }
-
-  .stat .figure {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.9rem;
-    font-variant-numeric: tabular-nums;
-    color: var(--heading);
-    line-height: 1;
-  }
-
-  .stat .label {
-    margin-top: 8px;
-    font-size: 0.8rem;
-    color: var(--ink-dim);
-    line-height: 1.4;
-  }
-
-  @media (max-width: 640px) {
-    .stat { flex: 1 1 45%; border-left: none; border-top: 1px solid var(--line); padding-top: 18px; }
-    .stat:nth-child(-n+2) { border-top: none; }
-  }
-
-  /* ---------- section heads ---------- */
-  .section-head {
-    text-align: center;
-    margin: 0 0 6px;
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-
-  .section-kicker {
-    display: block;
-    text-align: center;
-    font-family: var(--font-body);
-    font-style: italic;
-    font-size: 0.92rem;
-    color: var(--ink-dim);
-    margin-bottom: 38px;
-  }
-
-  section.experience, section.work, section.stack, section.creds { margin-top: 64px; }
-
-  /* ---------- selected work ---------- */
-  .work-item {
-    padding: 18px 0;
-    border-top: 1px solid var(--line);
-  }
-  .work-item:first-of-type { border-top: none; }
-
-  .work-item h3 { margin: 0 0 6px; font-size: 1.05rem; }
-  .work-item h3 a {
-    color: var(--heading);
-    text-decoration: none;
-    border-bottom: 1px solid var(--gold);
-  }
-  .work-item h3 a:hover { color: var(--gold-deep); }
-
-  .work-item p {
-    margin: 0;
-    font-size: 0.93rem;
-    color: var(--ink-dim);
-    max-width: 62ch;
-  }
-
-  /* ---------- experience ---------- */
-  .entry {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 24px;
-    padding: 28px 0;
-    border-top: 1px solid var(--line);
-  }
-  .entry:first-of-type { border-top: none; }
-
-  .entry-time {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 0.92rem;
-    color: var(--ink-dim);
-    padding-top: 3px;
-  }
-
-  .entry-body h3 {
-    margin: 0 0 4px;
-    font-weight: 700;
-    font-size: 1.2rem;
-  }
-
-  .entry-org {
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-style: normal;
-    color: var(--ink-dim);
-    font-size: 0.95rem;
-  }
-
-  .entry-body ul {
-    margin: 14px 0 0;
-    padding-left: 18px;
-  }
-
-  .entry-body li { margin-bottom: 8px; font-size: 0.96rem; color: var(--ink); }
-  .entry-body li::marker { color: var(--gold-deep); }
-
-  .entry-note {
-    margin: 14px 0 0;
-    font-size: 0.85rem;
-    font-style: italic;
     color: var(--ink-faint);
   }
 
-  @media (max-width: 600px) {
-    .entry { grid-template-columns: 1fr; gap: 6px; }
+  .dot {
+    position: relative;
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ok);
+    flex-shrink: 0;
+  }
+  .dot::after {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    background: var(--ok);
+    animation: ping 2.4s var(--ease) infinite;
+  }
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.7; }
+    80%, 100% { transform: scale(3); opacity: 0; }
   }
 
-  /* ---------- stack ---------- */
-  .skills-grid {
+  section { position: relative; padding: var(--section) 0 0; }
+  main > section:last-child { padding-bottom: var(--section); }
+
+  /* section heads: numbered index + title, left aligned */
+  .section-head {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 48px;
+    grid-template-columns: 1fr;
+    gap: var(--s2);
+    max-width: 760px;
+    margin-bottom: var(--s6);
+  }
+  .section-head .label { display: flex; align-items: center; gap: 12px; }
+  .section-head .label b { color: var(--accent); font-weight: 500; }
+  .section-head .label::after { content: ""; width: 40px; height: 1px; background: var(--line-strong); }
+  .section-head h2 { font-size: var(--fs-h2); text-wrap: balance; }
+  .section-head p { color: var(--ink-dim); margin: 0; max-width: 58ch; font-size: var(--fs-md); line-height: 1.6; }
+
+  /* ================= buttons ================= */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+    text-decoration: none;
+    padding: 17px 26px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: transform 0.25s var(--ease), background 0.2s ease, border-color 0.2s ease, box-shadow 0.3s ease, color 0.2s ease;
+  }
+  .btn .arrow { transition: transform 0.25s var(--ease); }
+  .btn:hover .arrow { transform: translateX(4px); }
+  .btn:hover .arrow.down { transform: translateY(3px); }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 12px 32px -10px var(--glow), 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .btn-primary::after {
+    content: "";
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
+    background-size: 250% 100%;
+    background-position: 120% 0;
+    opacity: 0;
+    transition: background-position 0.7s var(--ease), opacity 0.2s;
+    pointer-events: none;
+  }
+  .btn-primary:hover::after { background-position: -20% 0; opacity: 1; }
+
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .btn-sm { padding: 11px 18px; font-size: var(--fs-sm); border-radius: 10px; }
+
+  /* ================= scroll progress (narrow screens) ================= */
+  .progress {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    z-index: 60;
   }
 
-  .stack-row {
-    padding: 20px 0;
-    border-top: 1px solid var(--line);
+  /* ================= nav ================= */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--nav-h);
+    z-index: 50;
+    border-bottom: 1px solid transparent;
+    transition: background 0.25s ease, border-color 0.25s ease;
   }
-  .stack-row:nth-child(-n+2) { border-top: none; }
+  .nav.scrolled {
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom-color: var(--line);
+  }
+  .nav .wrap { height: 100%; display: flex; align-items: center; gap: var(--s3); }
 
-  .stack-label-row {
+  .logo {
+    display: inline-flex; align-items: center; gap: 12px;
+    text-decoration: none;
+    font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+    margin-right: auto;
+  }
+  .logo-mark {
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500;
+    color: var(--accent);
+    transition: transform 0.4s var(--ease), border-color 0.2s;
+  }
+  .logo:hover .logo-mark { transform: rotate(-8deg) scale(1.06); border-color: var(--accent); }
+
+  .nav-links { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; }
+  .nav-links a {
+    position: relative;
+    display: block;
+    padding: 8px 12px;
+    font-size: var(--fs-sm);
+    color: var(--ink-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 12px; right: 12px; bottom: 2px;
+    height: 1.5px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s var(--ease);
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); transform-origin: left; }
+
+  .nav-actions { display: flex; align-items: center; gap: 10px; }
+
+  .icon-btn {
+    width: 40px; height: 40px;
+    display: grid; place-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-dim);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .icon-btn:hover { color: var(--ink); border-color: var(--accent); }
+  .icon-btn svg { width: 18px; height: 18px; }
+  .theme-toggle svg { transition: transform 0.4s var(--ease); }
+  .theme-toggle:hover svg { transform: rotate(25deg); }
+  .theme-toggle .sun { display: none; }
+  :root[data-theme="light"] .theme-toggle .sun { display: block; }
+  :root[data-theme="light"] .theme-toggle .moon { display: none; }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .theme-toggle .sun { display: block; }
+    :root:not([data-theme="dark"]) .theme-toggle .moon { display: none; }
+  }
+
+  .nav-cta.pulse { animation: pulse 1.4s var(--ease) 1; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--glow); } 100% { box-shadow: 0 0 0 14px transparent; } }
+
+  .menu-btn { display: none; }
+  .menu-btn .bars { display: block; }
+  .menu-btn .bars span { display: block; width: 18px; height: 1.5px; background: currentColor; transition: transform 0.3s var(--ease); }
+  .menu-btn .bars span + span { margin-top: 5px; }
+  .menu-btn[aria-expanded="true"] .bars span:first-child { transform: translateY(3.25px) rotate(45deg); }
+  .menu-btn[aria-expanded="true"] .bars span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+
+  /* ================= signature: request trace rail ================= */
+  .trace {
+    position: fixed;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 40;
+    display: none;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+  .trace-head, .trace-foot { color: var(--ink-faint); white-space: nowrap; }
+  .trace-head { margin-bottom: 14px; }
+  .trace-head b { color: var(--ink-dim); font-weight: 500; }
+  .trace-track { position: relative; }
+  .trace ol {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .trace-track::before, .trace .trace-fill {
+    content: "";
+    position: absolute;
+    left: 4px; top: 5px; bottom: 5px;
+    width: 1px;
+    background: var(--line-strong);
+  }
+  .trace .trace-fill {
+    background: var(--accent);
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.15s linear;
+  }
+  .trace a {
+    position: relative;
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+    color: var(--ink-faint);
+  }
+  .trace a i {
+    position: relative; z-index: 1;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--bg);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
+  }
+  .trace a.done i { background: var(--ink-faint); border-color: var(--ink-faint); }
+  .trace a.active i {
+    background: var(--accent); border-color: var(--accent);
+    transform: scale(1.35);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent);
+  }
+  .trace a span {
+    padding: 4px 9px;
+    border-radius: 6px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-dim);
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-6px);
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.25s var(--ease);
+  }
+  .trace:hover a span, .trace a:focus-visible span { opacity: 1; transform: none; }
+  .trace a.active span { color: var(--ink); }
+  .trace-foot { margin-top: 14px; display: flex; align-items: center; gap: 8px; }
+  .trace-foot .code {
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    color: var(--ink-faint);
+    transition: color 0.3s, border-color 0.3s, background 0.3s;
+  }
+  .trace-foot .ms { opacity: 0; transition: opacity 0.4s; }
+  .trace.complete .code {
+    color: var(--ok);
+    border-color: color-mix(in srgb, var(--ok) 45%, transparent);
+    background: color-mix(in srgb, var(--ok) 10%, transparent);
+    animation: pop 0.5s var(--ease);
+  }
+  .trace.complete .ms { opacity: 1; }
+  .trace.complete .trace-fill { background: linear-gradient(var(--accent), var(--ok)); }
+  @keyframes pop { 50% { transform: scale(1.15); } }
+
+  @media (min-width: 1320px) {
+    .trace { display: block; }
+    .progress { display: none; }
+  }
+
+  /* ================= hero ================= */
+  .hero {
+    min-height: min(100svh, 920px);
     display: flex;
     align-items: center;
-    gap: 9px;
-    margin-bottom: 9px;
+    padding: calc(var(--nav-h) + var(--s6)) 0 var(--s7);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(var(--grid-dot) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 75% 45%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 75% 45%, #000 20%, transparent 75%);
+    animation: drift 40s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes drift { to { background-position: 28px 56px; } }
+
+  .hero .wrap { width: 100%; }
+  .hero-grid {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
+    gap: var(--s7);
+    align-items: center;
   }
 
-  .stack-icon {
-    width: 19px;
-    height: 19px;
-    color: var(--heading);
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px 8px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+
+  .hero h1 {
+    font-size: var(--fs-h1);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin: var(--s4) 0 var(--s4);
+  }
+  .hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.06em; }
+  .hero h1 .line > span { display: inline-block; }
+  .hero h1 .hl { color: var(--accent); }
+
+  .hero .sub {
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    line-height: 1.6;
+    color: var(--ink-dim);
+    max-width: 44ch;
+    margin: 0 0 var(--s5);
+  }
+  .hero .sub strong { color: var(--ink); font-weight: 500; }
+
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  .js .hero [data-in] { opacity: 0; transform: translateY(18px); }
+  .js .hero h1 .line > span { transform: translateY(110%); }
+  .js .hero .terminal { opacity: 0; transform: translateY(24px); }
+  .loaded .hero [data-in], .loaded .hero .terminal {
+    opacity: 1; transform: none;
+    transition: opacity 0.8s var(--ease), transform 0.9s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+  .loaded .hero h1 .line > span {
+    transform: none;
+    transition: transform 1s var(--ease);
+    transition-delay: var(--d, 0s);
+  }
+
+  /* terminal: quieter, monochrome chrome */
+  .terminal {
+    border-radius: var(--radius);
+    border: 1px solid var(--line-strong);
+    background: #0A0810;
+    box-shadow: 0 40px 80px -40px rgba(0,0,0,0.55);
+    overflow: hidden;
+    color: #E6E0EE;
+  }
+  .term-bar {
+    display: flex; align-items: center; gap: 7px;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .term-bar i { width: 9px; height: 9px; border-radius: 50%; background: #3A3049; }
+  .term-title { margin-left: 10px; font-family: var(--font-mono); font-size: var(--fs-xs); color: #8A7F9C; }
+  .term-status {
+    margin-left: auto;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: var(--fs-xs); color: #3DDC97;
+    opacity: 0; transition: opacity 0.5s;
+  }
+  .term-status.on { opacity: 1; }
+  .term-status .dot, .term-status .dot::after { width: 6px; height: 6px; background: #3DDC97; }
+
+  .term-body {
+    padding: 22px 22px 26px;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.85;
+    min-height: 236px;
+  }
+  .tl { white-space: pre-wrap; word-break: break-word; }
+  .tl.cmd::before { content: "$ "; color: #FDD023; }
+  .tl.out { color: #B3A8C2; }
+  .tl.ok { color: #3DDC97; }
+  .tl.gap { height: 0.7em; }
+  .js .tl.hidden { display: none; }
+  .caret {
+    display: inline-block;
+    width: 8px; height: 1.05em;
+    vertical-align: -0.18em;
+    background: #FDD023;
+    margin-left: 2px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ================= reveal system ================= */
+  .js .reveal { opacity: 0; transform: translateY(28px); }
+  .js .reveal.in {
+    opacity: 1; transform: none;
+    transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+
+  /* ================= impact: open band, no cards ================= */
+  .impact { padding-top: 0; }
+  .impact-band {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat { padding: var(--s5) var(--s4) var(--s5) 0; }
+  .stat + .stat { padding-left: var(--s4); border-left: 1px solid var(--line); }
+  .stat .figure {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.6rem, 4.6vw, 3.75rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .figure em { font-style: normal; color: var(--accent); }
+  .stat p { margin: var(--s2) 0 0; font-size: var(--fs-sm); color: var(--ink-dim); line-height: 1.55; max-width: 24ch; }
+  .spark { margin-top: var(--s2); width: 100%; max-width: 180px; height: 28px; overflow: visible; }
+  .spark path { fill: none; stroke: var(--ok); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .js .spark path { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .js .stat.in .spark path { stroke-dashoffset: 0; transition: stroke-dashoffset 1.4s var(--ease) 0.4s; }
+
+  /* ================= pillars: open columns, rule on top ================= */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5); }
+  .pillar { position: relative; padding-top: var(--s4); border-top: 1px solid var(--line-strong); }
+  .pillar::before {
+    content: "";
+    position: absolute; top: -1px; left: 0;
+    width: 100%; height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.9s var(--ease);
+  }
+  .pillar.in::before { transform: scaleX(0.18); transition-delay: calc(var(--i, 0) * 90ms + 0.2s); }
+  .pillar:hover::before { transform: scaleX(1); transition-delay: 0s; }
+  .pillar-icon { width: 28px; height: 28px; color: var(--accent); margin-bottom: var(--s3); }
+  .pillar-icon svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .js .pillar-icon path, .js .pillar-icon circle { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .js .pillar.in .pillar-icon path, .js .pillar.in .pillar-icon circle {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.2s var(--ease) calc(var(--i, 0) * 90ms + 0.3s);
+  }
+  .pillar h3 { font-size: var(--fs-lg); margin-bottom: var(--s2); }
+  .pillar p { margin: 0 0 var(--s3); color: var(--ink-dim); }
+  .pillar ul { list-style: none; margin: 0; padding: 0; }
+  .pillar li {
+    position: relative;
+    padding: 10px 0 10px 26px;
+    font-size: var(--fs-sm);
+    border-top: 1px dashed var(--line);
+  }
+  .pillar li::before {
+    content: "✓";
+    position: absolute; left: 2px; top: 10px;
+    color: var(--ok);
+    font-family: var(--font-mono);
+  }
+
+  /* ================= case studies: the only card grid ================= */
+  .cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); perspective: 1200px; }
+  .case {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.4s var(--ease), transform 0.4s var(--ease);
+    will-change: transform;
+  }
+  .case:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); box-shadow: 0 28px 60px -32px var(--glow); }
+
+  .pipe-wrap {
+    position: relative;
+    padding: 56px var(--s3) var(--s3);
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+  }
+  .pipe-wrap .label { position: absolute; top: 18px; left: var(--s3); }
+  .pipe { position: relative; display: flex; justify-content: space-between; align-items: flex-start; }
+  .pipe::before, .pipe::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px; top: 13px;
+    height: 2px;
+    background: var(--line-strong);
+  }
+  .pipe::after { background: var(--ok); transform-origin: left; transform: scaleX(0); }
+  .case.in .pipe::after { transform: scaleX(1); transition: transform 1.6s var(--ease) 0.3s; }
+  html:not(.js) .pipe::after { transform: scaleX(1); }
+
+  .node { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 25%; }
+  .node b {
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    border: 2px solid var(--line-strong);
+    background: var(--surface);
+    font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 500;
+    color: var(--ink-faint);
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+  }
+  .node span { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--ink-faint); text-align: center; line-height: 1.35; }
+  .case.in .node b, html:not(.js) .node b {
+    border-color: var(--ok);
+    background: color-mix(in srgb, var(--ok) 14%, var(--surface));
+    color: var(--ok);
+    transition-delay: calc(0.35s + var(--n) * 0.38s);
+  }
+  .case.in .node b { animation: pop 0.45s var(--ease) both; animation-delay: calc(0.35s + var(--n) * 0.38s); }
+
+  .passed {
+    position: absolute; top: 14px; right: var(--s3);
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-family: var(--font-mono); font-size: var(--fs-xs);
+    color: var(--ok);
+    background: color-mix(in srgb, var(--ok) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+  }
+  .js .passed { opacity: 0; transform: translateY(-4px); }
+  .js .case.in .passed { opacity: 1; transform: none; transition: opacity 0.4s, transform 0.4s var(--ease); transition-delay: 2s; }
+
+  .case-body { padding: var(--s4) var(--s4) var(--s4); display: flex; flex-direction: column; flex: 1; }
+  .case-body h3 { font-size: var(--fs-md); margin-bottom: var(--s3); }
+  .case dl { margin: 0 0 var(--s4); display: grid; gap: var(--s2); }
+  .case dt { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand); }
+  .case dd { margin: 4px 0 0; font-size: var(--fs-sm); color: var(--ink-dim); line-height: 1.6; }
+  .case-link {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: var(--fs-sm);
+    text-decoration: none;
+  }
+  .case-link .arrow { display: inline-block; transition: transform 0.3s var(--ease); color: var(--accent); }
+  .case:hover .case-link .arrow { transform: translate(3px, -3px); }
+
+  /* ================= career ================= */
+  .career-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.5fr); gap: var(--s7); align-items: start; }
+  .career-intro { position: sticky; top: calc(var(--nav-h) + var(--s5)); }
+  .career-intro .section-head { margin-bottom: var(--s4); }
+  .career-intro .big {
+    font-family: var(--font-display); font-weight: 700;
+    font-size: clamp(4rem, 8vw, 6.5rem); line-height: 0.9; letter-spacing: -0.05em;
+    color: var(--ink);
+  }
+  .career-intro .big em { font-style: normal; font-size: 0.4em; letter-spacing: -0.02em; color: var(--ink-faint); margin-left: 6px; }
+
+  .timeline { position: relative; padding-left: 44px; }
+  .timeline::before, .timeline .fill {
+    content: "";
+    position: absolute;
+    left: 11px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--line-strong);
+  }
+  .timeline .fill { width: 2px; left: 10.5px; background: linear-gradient(var(--accent), var(--brand)); transform-origin: top; transform: scaleY(0); }
+  html:not(.js) .timeline .fill { transform: none; }
+
+  .t-item { position: relative; padding-bottom: var(--s4); }
+  .t-item:last-child { padding-bottom: 0; }
+  .t-item::before {
+    content: "";
+    position: absolute;
+    left: -39px; top: 7px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    border: 2px solid var(--line-strong);
+    background: var(--bg);
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.4s;
+  }
+  .t-item.on::before, html:not(.js) .t-item::before {
+    border-color: var(--accent); background: var(--accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .js .t-item { opacity: 0.4; transition: opacity 0.5s var(--ease); }
+  .js .t-item.on { opacity: 1; }
+
+  .t-ver { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--ink-faint); letter-spacing: 0.06em; }
+  .t-ver em { font-style: normal; color: var(--ok); }
+  .t-item h3 { font-size: var(--fs-md); margin: 6px 0 2px; }
+  .t-item .org { font-size: var(--fs-sm); color: var(--ink-dim); }
+
+  .t-item.current {
+    padding: var(--s4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    margin-bottom: var(--s4);
+  }
+  .t-item.current::before { top: 37px; }
+  .t-item.current h3 { font-size: var(--fs-lg); }
+  .t-item.current ul { margin: var(--s3) 0 0; padding-left: 18px; }
+  .t-item.current li { font-size: var(--fs-sm); line-height: 1.6; margin-bottom: 10px; color: var(--ink-dim); }
+  .t-item.current li::marker { color: var(--accent); }
+
+  .t-earlier { margin-top: var(--s2); padding-top: var(--s4); border-top: 1px dashed var(--line); }
+  .t-earlier::before { top: calc(var(--s4) + 7px); }
+
+  /* ================= stack ================= */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--s4); }
+  .chip {
+    font-family: var(--font-mono); font-size: var(--fs-xs);
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--ink-dim);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.25s var(--ease);
+  }
+  .chip:hover { color: var(--ink); border-color: var(--ink-faint); transform: translateY(-1px); }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag-item {
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: var(--fs-sm);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), border-color 0.3s;
+  }
+  .tag-item:hover { border-color: var(--brand); }
+  .tag-item.dim { opacity: 0.2; transform: scale(0.96); }
+  .tag-item.match { border-color: color-mix(in srgb, var(--accent) 60%, var(--line)); }
+  .js .tags.pre .tag-item { opacity: 0; transform: translateY(8px) scale(0.96); }
+  .tags.go .tag-item { transition-delay: calc(var(--t) * 18ms); }
+
+  /* ================= credentials: quiet list ================= */
+  .creds-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--s5); }
+  .cred h3 { margin-bottom: var(--s3); }
+  .cred ul { list-style: none; margin: 0; padding: 0; }
+  .cred li { padding: 14px 0; border-top: 1px solid var(--line); font-size: var(--fs-sm); color: var(--ink-dim); }
+  .cred li strong { display: block; color: var(--ink); font-weight: 600; font-size: 0.95rem; line-height: 1.45; margin-bottom: 2px; }
+
+  .award .badge {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    background: var(--plate);
+    padding: 16px 22px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    margin: 0 0 var(--s3);
+  }
+  .award .badge img { height: 48px; width: auto; }
+  .award .badge::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(110deg, transparent 35%, rgba(253, 208, 35, 0.5) 50%, transparent 65%);
+    transform: translateX(-120%);
+  }
+  .award.in .badge::after { transform: translateX(120%); transition: transform 1.6s var(--ease) 0.5s; }
+  .award blockquote { margin: 0; font-family: var(--font-display); font-size: var(--fs-md); line-height: 1.45; font-weight: 500; text-wrap: balance; }
+  .award .src { margin-top: 10px; }
+
+  /* ================= final CTA ================= */
+  .cta-panel {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(56px, 9vw, 120px) clamp(24px, 6vw, 96px);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background: var(--surface);
+    text-align: center;
+  }
+  .cta-panel::before {
+    content: "";
+    position: absolute; inset: -40%;
+    background:
+      radial-gradient(closest-side at 30% 40%, color-mix(in srgb, var(--accent) 18%, transparent), transparent),
+      radial-gradient(closest-side at 70% 60%, color-mix(in srgb, var(--brand) 24%, transparent), transparent);
+    animation: swirl 22s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes swirl { to { transform: rotate(25deg) translate(6%, -4%); } }
+  .cta-panel > * { position: relative; }
+  .cta-panel .status-pill { background: color-mix(in srgb, var(--bg) 50%, transparent); }
+  .cta-panel h2 { font-size: var(--fs-h2); max-width: 18ch; margin: var(--s4) auto var(--s3); text-wrap: balance; }
+  .cta-panel p { color: var(--ink-dim); font-size: var(--fs-md); max-width: 46ch; margin: 0 auto var(--s5); }
+  .cta-panel p strong { color: var(--ink); }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .copy-btn.copied { border-color: var(--ok); color: var(--ok); }
+  .cta-links { margin-top: var(--s5); display: flex; flex-wrap: wrap; gap: var(--s1) var(--s4); justify-content: center; font-size: var(--fs-sm); }
+  .cta-links a { color: var(--ink-dim); text-decoration: none; border-bottom: 1px solid var(--line-strong); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .cta-links a:hover { color: var(--ink); border-color: var(--accent); }
+
+  /* ================= footer ================= */
+  footer { padding: var(--s5) 0; border-top: 1px solid var(--line); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--ink-faint); }
+  footer .status { display: inline-flex; align-items: center; gap: 10px; }
+  footer nav { display: flex; gap: var(--s3); }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); }
+
+  /* ================= trust: proof strip ================= */
+  .proof-strip {
+    list-style: none;
+    margin: 0 0 var(--s5);
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: var(--s4);
+  }
+  .proof-item { padding: 0 var(--s3); border-left: 1px solid var(--line); }
+  .proof-item:first-child { padding-left: 0; border-left: none; }
+  .proof-item .label { display: block; margin-bottom: 8px; }
+  .proof-item strong { display: block; font-family: var(--font-display); font-weight: 600; font-size: var(--fs-base); line-height: 1.3; }
+  .proof-item .sub { display: block; margin-top: 2px; font-size: var(--fs-sm); color: var(--ink-dim); }
+  .proof-item a { color: var(--brand); text-decoration: none; }
+  .proof-item a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ================= trust: note ================= */
+  .note-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr); gap: var(--s7); align-items: start; }
+  .note { position: relative; margin: 0; padding-left: var(--s5); }
+  .note::before {
+    content: "";
+    position: absolute; left: 0; top: 6px; bottom: 6px;
+    width: 2px;
+    background: linear-gradient(var(--accent), transparent);
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 1.4s var(--ease) 0.2s;
+  }
+  .note.in::before, html:not(.js) .note::before { transform: none; }
+  .note-body p {
+    margin: 0 0 var(--s3);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1.15rem, 1.7vw, 1.375rem);
+    line-height: 1.55;
+    letter-spacing: -0.01em;
+    color: var(--ink-dim);
+  }
+  .note-body p:first-child { color: var(--ink); }
+  .note-sign { display: flex; align-items: center; gap: var(--s2); margin-top: var(--s4); }
+  .note-sign strong { display: block; font-weight: 600; }
+  .note-sign .label { display: block; margin-top: 2px; text-transform: none; letter-spacing: 0.02em; }
+  .monogram {
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    font-family: var(--font-mono); font-size: 0.9rem;
+    color: var(--accent);
     flex-shrink: 0;
   }
 
-  .stack-cat {
-    font-size: 0.78rem;
+  /* ================= trust: answers ================= */
+  .answers-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr); gap: var(--s7); align-items: start; }
+  .answers-intro { position: sticky; top: calc(var(--nav-h) + var(--s5)); margin-bottom: 0; }
+  .qa { border-top: 1px solid var(--line); }
+  .qa:last-child { border-bottom: 1px solid var(--line); }
+  .qa summary {
+    list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+    min-height: 44px;
+    padding: var(--s3) 0;
+    cursor: pointer;
+    font-family: var(--font-display);
     font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--heading);
+    font-size: var(--fs-md);
+    line-height: 1.35;
+    transition: color 0.2s;
+  }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary:hover { color: var(--accent); }
+  .qa summary i {
+    position: relative;
+    width: 28px; height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    transition: transform 0.35s var(--ease), border-color 0.2s, background 0.2s;
+  }
+  .qa summary i::before, .qa summary i::after {
+    content: "";
+    position: absolute; left: 50%; top: 50%;
+    width: 10px; height: 1.5px;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+  }
+  .qa summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .qa[open] summary i { transform: rotate(45deg); border-color: var(--accent); }
+  .qa .a { padding: 0 var(--s6) var(--s3) 0; }
+  .qa .a p { margin: 0; color: var(--ink-dim); max-width: 62ch; }
+  .qa .a a { color: var(--brand); text-underline-offset: 3px; }
+  .qa[open] .a { animation: qa-in 0.4s var(--ease); }
+  @keyframes qa-in { from { opacity: 0; transform: translateY(-6px); } }
+
+  /* ================= trust: commitments (inside the CTA panel) ================= */
+  .promises {
+    list-style: none;
+    margin: var(--s5) auto 0;
+    padding: var(--s4) 0 0;
+    max-width: 880px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s3);
+    border-top: 1px solid var(--line);
+    text-align: left;
+  }
+  .promises li { display: flex; gap: 12px; font-size: var(--fs-sm); color: var(--ink-dim); line-height: 1.5; }
+  .promises strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: 2px; }
+  .promises svg {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    padding: 3px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ok) 14%, transparent);
+    fill: none; stroke: var(--ok); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
   }
 
-  .stack-items {
-    font-size: 0.97rem;
-    color: var(--ink);
+  /* ================= phone-only pieces (hidden by default) ================= */
+  .swipe-hint { display: none; justify-content: space-between; margin: calc(-1 * var(--s2)) 0 var(--s2); }
+  .more-btn {
+    display: none;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 4px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--brand);
+    cursor: pointer;
+  }
+  .mbar {
+    display: none;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 45;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line);
+    transform: translateY(110%);
+    transition: transform 0.35s var(--ease);
+  }
+  .mbar.show { transform: none; }
+
+  /* ================= responsive ================= */
+  @media (max-width: 1080px) {
+    .hero { min-height: 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: var(--s6); }
+    .hero .terminal { max-width: 620px; }
+    .impact-band { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(3) { padding-left: 0; border-left: none; }
+    .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .pillars { grid-template-columns: 1fr; gap: var(--s5); max-width: 640px; }
+    .cases { grid-template-columns: 1fr 1fr; }
+    .cases .case:last-child { grid-column: 1 / -1; }
+    .career-grid { grid-template-columns: 1fr; gap: var(--s5); }
+    .career-intro { position: static; }
+    .creds-grid { grid-template-columns: 1fr 1fr; }
+    .creds-grid .award { grid-column: 1 / -1; }
+    .proof-strip { grid-template-columns: repeat(3, 1fr); }
+    .proof-item:nth-child(3n+1) { padding-left: 0; border-left: none; }
+    .note-grid, .answers-grid { grid-template-columns: 1fr; gap: var(--s4); }
+    .answers-intro { position: static; }
+    .promises { grid-template-columns: 1fr; max-width: 460px; }
   }
 
-  .stack-items .sep {
-    color: var(--gold-deep);
-    margin: 0 8px;
+  @media (max-width: 860px) {
+    .menu-btn { display: grid; }
+    .nav-links {
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      padding: 8px var(--gutter) 20px;
+      background: color-mix(in srgb, var(--bg) 97%, transparent);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, transform 0.3s var(--ease), visibility 0.25s;
+    }
+    .nav-links.open { opacity: 1; transform: none; visibility: visible; }
+    .nav-links a { padding: 16px 0; font-size: var(--fs-base); border-bottom: 1px solid var(--line); }
+    .nav-links li:last-child a { border-bottom: none; }
+    .nav-links a::after { display: none; }
   }
 
   @media (max-width: 640px) {
-    .skills-grid { grid-template-columns: 1fr; }
-    .stack-row:nth-child(-n+2) { border-top: 1px solid var(--line); }
-    .stack-row:first-child { border-top: none; }
+    :root { --gutter: 20px; --nav-h: 60px; --section: 72px; --fs-xs: 0.8125rem; }
+    body { font-size: 1rem; }
+    .section-head { margin-bottom: var(--s4); gap: 12px; }
+    .section-head h2 { font-size: 1.875rem; }
+    .section-head p { font-size: 1rem; }
+
+    /* tap targets: 44px minimum */
+    .icon-btn { width: 44px; height: 44px; }
+    .logo { min-height: 44px; min-width: 44px; }
+    .nav-cta, .logo-name { display: none; }
+
+    /* hero: fits one screen, CTAs land in thumb reach, no terminal */
+    .hero { padding: calc(var(--nav-h) + var(--s4)) 0 var(--s5); }
+    .hero::before { animation: none; }
+    .hero .terminal { display: none; }
+    .status-pill .clouds { display: none; }
+    .hero h1 { font-size: 2.3rem; margin: var(--s3) 0 var(--s2); }
+    .hero .sub { font-size: 1.0625rem; margin-bottom: var(--s4); }
+    .hero-ctas { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+    .hero-ctas .btn, .cta-actions .btn, .mbar .btn { min-height: 52px; }
+    .mbar { display: grid; }
+
+    /* impact */
+    .stat { padding: var(--s3) var(--s2) var(--s3) 0; }
+    .stat + .stat { padding-left: var(--s2); }
+    .stat:nth-child(3) { padding-left: 0; }
+    .stat .figure { font-size: 2.25rem; }
+    .spark { display: none; }
+
+    /* pillars: keep the proof list, drop the prose */
+    .pillars { gap: var(--s4); }
+    .pillar { padding-top: var(--s3); }
+    .pillar > p { display: none; }
+    .pillar-icon { margin-bottom: var(--s2); }
+    .pillar h3 { margin-bottom: var(--s1); }
+
+    /* case studies: one swipeable row instead of three stacked cards */
+    .cases {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      margin: 0 calc(-1 * var(--gutter));
+      padding: 4px var(--gutter) 8px;
+      scroll-padding-left: var(--gutter);
+      scrollbar-width: none;
+      perspective: none;
+    }
+    .cases::-webkit-scrollbar { display: none; }
+    .case { flex: 0 0 86%; scroll-snap-align: start; }
+    .js .cases .reveal { opacity: 1; transform: none; } /* keep the peeking card visible as a swipe cue */
+    .swipe-hint { display: flex; }
+    .pipe-wrap { padding: 52px 14px 18px; }
+    .node span { font-size: 0.75rem; }
+    .case-body { padding: var(--s3); }
+    .case dl { gap: 12px; margin-bottom: var(--s2); }
+    .case-link { min-height: 48px; width: 100%; border-top: 1px solid var(--line); }
+
+    /* career: long role collapses to three bullets */
+    .career-intro .big { font-size: 3.5rem; }
+    .timeline { padding-left: 34px; }
+    .t-item::before { left: -29px; }
+    .timeline::before { left: 6px; }
+    .timeline .fill { left: 5.5px; }
+    .t-item { padding-bottom: var(--s3); }
+    .t-item.current { padding: var(--s3); }
+    .t-item.current::before { top: 31px; }
+    .t-item.current li.more { display: none; }
+    .t-item.current.expanded li.more { display: list-item; }
+    .more-btn { display: inline-flex; }
+
+    /* stack: filters become a swipeable strip, tags tighten */
+    .chips {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      margin: 0 calc(-1 * var(--gutter)) var(--s3);
+      padding: 0 var(--gutter);
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar { display: none; }
+    .chip { flex: 0 0 auto; min-height: 44px; }
+    .tags { gap: 8px; }
+    .tag-item { padding: 8px 12px; font-size: 0.875rem; }
+
+    /* trust blocks */
+    .proof-strip { grid-template-columns: 1fr 1fr; row-gap: var(--s3); margin-bottom: var(--s4); }
+    .proof-item { padding: 0 var(--s2); }
+    .proof-item:nth-child(3n+1) { padding-left: var(--s2); border-left: 1px solid var(--line); }
+    .proof-item:nth-child(odd) { padding-left: 0; border-left: none; }
+    .proof-item a { display: inline-block; padding: 14px 0; margin: -14px 0; } /* 44px hit area, same layout */
+    .note { padding-left: var(--s3); }
+    .note-body p { font-size: 1.0625rem; }
+    .qa summary { font-size: 1.0625rem; padding: var(--s2) 0; }
+    .qa .a { padding-right: 0; }
+    .promises { margin-top: var(--s4); }
+
+    /* credentials */
+    .creds-grid { grid-template-columns: 1fr; gap: var(--s4); }
+    .cred h3 { margin-bottom: var(--s2); }
+    .award .badge img { height: 40px; }
+
+    /* contact */
+    .cta-panel { border-radius: 20px; }
+    .cta-panel::before { animation: none; }
+    .cta-panel p { margin-bottom: var(--s4); }
+    .cta-actions .btn { flex: 1 1 100%; }
+    .cta-links { margin-top: var(--s3); gap: 0 var(--s3); }
+    .cta-links a { display: inline-flex; align-items: center; min-height: 44px; }
+
+    footer { padding-bottom: calc(var(--s5) + 72px + env(safe-area-inset-bottom)); }
+    footer .wrap { flex-direction: column; align-items: flex-start; }
+    footer nav a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+
+    /* lighter motion: shorter travel, faster, no ambient loops */
+    .dot::after { animation: none; }
+    .status-pill .dot::after { animation: ping 2.4s var(--ease) infinite; }
+    .js .reveal { transform: translateY(14px); }
+    .js .reveal.in { transition-duration: 0.55s; transition-delay: calc(var(--i, 0) * 50ms); }
+    .loaded .hero [data-in] { transition-duration: 0.5s; transition-delay: calc(var(--d, 0s) * 0.5); }
+    .loaded .hero h1 .line > span { transition-duration: 0.7s; transition-delay: calc(var(--d, 0s) * 0.5); }
   }
 
-  /* ---------- credentials ---------- */
-  .creds {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+  @media (max-width: 340px) {
+    .impact-band { grid-template-columns: 1fr; }
+    .stat, .stat + .stat { padding-left: 0; border-left: none; }
+    .stat + .stat { border-top: 1px solid var(--line); }
   }
 
-  .creds ul { margin: 0; padding: 0; list-style: none; }
-  .creds li {
-    padding: 12px 0;
-    border-top: 1px solid var(--line);
-    font-size: 0.93rem;
-    color: var(--ink-dim);
+  /* ================= reduced motion ================= */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.15s !important; transition-delay: 0s !important; }
+    .js .reveal, .js .hero [data-in], .js .hero .terminal, .js .hero h1 .line > span { transform: none !important; }
+    .dot::after { display: none; }
   }
-  .creds li:first-of-type { border-top: none; }
-  .creds li strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
-
-  @media (max-width: 600px) {
-    .creds { grid-template-columns: 1fr; gap: 36px; }
-  }
-
-  /* ---------- footer ---------- */
-  footer.contact {
-    margin-top: 70px;
-    padding-top: 44px;
-    border-top: 1px solid var(--line);
-    text-align: center;
-  }
-
-  .award-label {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--heading);
-    margin-bottom: 10px;
-  }
-
-  .badge {
-    display: inline-block;
-    background: #ffffff;
-    padding: 10px 18px;
-    border-radius: 6px;
-    box-shadow: 0 0 0 1px var(--line);
-    margin-bottom: 16px;
-  }
-
-  .badge img {
-    display: block;
-    height: 48px;
-    width: auto;
-  }
-
-  .quote {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.1rem;
-    color: var(--ink-dim);
-    max-width: 46ch;
-    margin: 0 auto 36px;
-    text-wrap: balance;
-  }
-
-  .contact-line {
-    font-size: 0.92rem;
-    color: var(--ink-dim);
-    margin-bottom: 30px;
-  }
-
-  .contact-line a { text-decoration: none; }
-  .contact-line a:hover { color: var(--heading); }
-
-  .contact-line .sep { color: var(--gold-deep); margin: 0 10px; }
-
-  .contact-btn {
-    font: inherit;
-    color: inherit;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    text-decoration: underline;
-    text-decoration-color: var(--line);
-    text-underline-offset: 3px;
-  }
-  .contact-btn:hover { color: var(--heading); text-decoration-color: var(--gold-deep); }
-
-  .contact-btn-revealed {
-    cursor: text;
-    text-decoration: none;
-    color: var(--ink-dim);
-  }
-  .contact-btn-revealed:hover { color: var(--ink-dim); }
-
-  .footer-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
 </style>
+</head>
 
-<div class="page">
+<body>
+<div class="progress" aria-hidden="true"></div>
 
-  <header class="masthead">
-    <p class="name">MUSTAFA F. SUNKA</p>
-    <p class="role">Senior DevSecOps Engineer</p>
-    <div class="rule"></div>
-  </header>
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Mustafa F. Sunka — back to top">
+      <span class="logo-mark">MS</span>
+      <span class="logo-name">Mustafa Sunka</span>
+    </a>
 
-  <section class="hero">
-    <span class="eyebrow">8+ Years · AWS · Azure · GCP</span>
-    <h1>Infrastructure that holds up —<br>under load, and under audit.</h1>
-    <p class="lede">I design and operate highly available cloud infrastructure for organizations that can't afford downtime or a failed audit. The work is mostly unglamorous: Terraform modules, runbooks, and alerting that catches a problem before a customer does.</p>
-    <div class="hero-ctas">
-      <a class="btn btn-primary" href="https://github.com/espnguy/portfolio">View Portfolio →</a>
-      <a class="btn btn-ghost" href="https://github.com/espnguy">GitHub Profile</a>
-      <a class="btn btn-ghost" href="/resume.pdf" download>Download Résumé ↓</a>
-    </div>
-  </section>
+    <nav aria-label="Primary">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#what">What I do</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
 
-  <section class="stats" aria-label="Impact metrics">
-    <div class="stat">
-      <div class="figure">99.9%</div>
-      <div class="label">availability sustained across 20+ critical services</div>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm nav-cta" href="#contact">Get in touch</a>
+      <button class="icon-btn menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <span class="bars"><span></span><span></span></span>
+      </button>
     </div>
-    <div class="stat">
-      <div class="figure">75%</div>
-      <div class="label">cut in provisioning time via reusable Terraform modules</div>
-    </div>
-    <div class="stat">
-      <div class="figure">75%</div>
-      <div class="label">reduction in downtime from unified observability</div>
-    </div>
-    <div class="stat">
-      <div class="figure">40%</div>
-      <div class="label">faster incident detection via Splunk &amp; LogicMonitor</div>
-    </div>
-    <div class="stat">
-      <div class="figure">65%</div>
-      <div class="label">faster recovery — automated DR runbooks, 2-hr RTO</div>
-    </div>
-    <div class="stat">
-      <div class="figure">100%</div>
-      <div class="label">compliance sustained across 3 straight audit cycles</div>
-    </div>
-    <div class="stat">
-      <div class="figure">500+</div>
-      <div class="label">endpoints under continuous monitoring</div>
-    </div>
-    <div class="stat">
-      <div class="figure">40+</div>
-      <div class="label">security controls embedded into IaC pipelines</div>
-    </div>
-  </section>
+  </div>
+</header>
 
-  <section class="experience">
-    <h2 class="section-head">Experience</h2>
-    <span class="section-kicker">Thirteen years, one company, five roles</span>
+<!-- ================= SIGNATURE: the page as a request trace ================= -->
+<nav class="trace" id="trace" aria-label="Page sections">
+  <div class="trace-head"><b>GET</b> /mustafa</div>
+  <div class="trace-track">
+  <span class="trace-fill" aria-hidden="true"></span>
+  <ol>
+    <li><a href="#top"><i></i><span>01 · overview</span></a></li>
+    <li><a href="#impact"><i></i><span>02 · impact</span></a></li>
+    <li><a href="#what"><i></i><span>03 · what-i-do</span></a></li>
+    <li><a href="#work"><i></i><span>04 · work</span></a></li>
+    <li><a href="#note"><i></i><span>05 · note</span></a></li>
+    <li><a href="#career"><i></i><span>06 · career</span></a></li>
+    <li><a href="#stack"><i></i><span>07 · stack</span></a></li>
+    <li><a href="#creds"><i></i><span>08 · credentials</span></a></li>
+    <li><a href="#answers"><i></i><span>09 · answers</span></a></li>
+    <li><a href="#contact"><i></i><span>10 · contact</span></a></li>
+  </ol>
+  </div>
+  <div class="trace-foot"><span class="code">200 OK</span><span class="ms" id="trace-ms"></span></div>
+</nav>
 
-    <article class="entry">
-      <div class="entry-time">Feb 2013 —<br>Present</div>
-      <div class="entry-body">
-        <h3>Senior DevSecOps Engineer <span class="entry-org">· Global Payments, Dallas, TX</span></h3>
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="status-pill" data-in style="--d:.05s"><span class="dot"></span>Senior DevSecOps Engineer<span class="clouds"> · AWS · Azure · GCP</span></span>
+
+      <h1 id="hero-title">
+        <span class="line"><span style="--d:.15s">Infrastructure that holds up —</span></span>
+        <span class="line"><span class="hl" style="--d:.3s">under load, and under audit.</span></span>
+      </h1>
+
+      <p class="sub" data-in style="--d:.55s">8+ years keeping payment infrastructure at <strong>99.9% availability</strong> across three clouds, and passing every compliance audit along the way.</p>
+
+      <div class="hero-ctas" data-in style="--d:.7s">
+        <a class="btn btn-primary magnetic js-email" href="#contact">Email me <span class="arrow">→</span></a>
+        <a class="btn btn-ghost" href="/resume.pdf" download>Résumé <span class="arrow down">↓</span></a>
+      </div>
+    </div>
+
+    <div class="terminal" style="--d:.5s" aria-label="Example deploy session: plan, policy scan, and a healthy production deploy">
+      <div class="term-bar">
+        <i></i><i></i><i></i>
+        <span class="term-title">deploy.sh</span>
+        <span class="term-status"><span class="dot"></span>operational</span>
+      </div>
+      <div class="term-body" aria-hidden="true">
+        <div class="tl cmd">terraform plan</div>
+        <div class="tl out">Plan: 12 to add, 3 to change, 0 to destroy.</div>
+        <div class="tl gap"></div>
+        <div class="tl cmd">checkov -d ./infra</div>
+        <div class="tl out">Passed: 148 · Failed: 0</div>
+        <div class="tl gap"></div>
+        <div class="tl cmd">./deploy.sh --env prod</div>
+        <div class="tl ok">✓ healthy · SLO 99.9% met</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section class="impact" id="impact" aria-label="Impact metrics">
+  <div class="wrap">
+    <ul class="proof-strip reveal" aria-label="Track record at a glance">
+      <li class="proof-item"><span class="label">Employer</span><strong>Global Payments</strong><span class="sub">NYSE: GPN · 13 years</span></li>
+      <li class="proof-item"><span class="label">Recognition</span><strong>Circle of Excellence</strong><span class="sub">Company award · 2020</span></li>
+      <li class="proof-item"><span class="label">Certified</span><strong>Azure Administrator</strong><span class="sub">Microsoft Associate</span></li>
+      <li class="proof-item"><span class="label">Environment</span><strong>PCI DSS</strong><span class="sub">Regulated payments</span></li>
+      <li class="proof-item"><span class="label">Education</span><strong>M.S., UT Dallas</strong><span class="sub">IT Management</span></li>
+      <li class="proof-item"><span class="label">Open source</span><strong>13 projects</strong><span class="sub"><a href="https://github.com/espnguy/portfolio">Read the code ↗</a></span></li>
+    </ul>
+
+    <div class="impact-band">
+      <div class="stat reveal" style="--i:0">
+        <div class="figure" data-count="99.9" data-decimals="1" data-suffix="%">99.9%</div>
+        <p>availability held across 20+ critical services</p>
+        <svg class="spark" viewBox="0 0 180 28" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 7 L18 6 L32 8 L46 6 L60 7 L70 6 L80 16 L88 7 L108 6 L126 7 L140 5 L156 6 L168 5 L180 6"/></svg>
+      </div>
+      <div class="stat reveal" style="--i:1">
+        <div class="figure" data-count="75" data-suffix="%">75%</div>
+        <p>faster provisioning through reusable Terraform modules</p>
+      </div>
+      <div class="stat reveal" style="--i:2">
+        <div class="figure" data-count="65" data-suffix="%">65%</div>
+        <p>faster recovery from automated DR runbooks, 2-hour RTO</p>
+      </div>
+      <div class="stat reveal" style="--i:3">
+        <div class="figure" data-count="100" data-suffix="%">100%</div>
+        <p>compliance across 3 straight audit cycles</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT I DO ================= -->
+<section id="what" aria-labelledby="what-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label"><b>03</b> What I do</span>
+      <h2 id="what-title">Reliable and secure are the same job.</h2>
+      <p>Most teams treat uptime, security, and compliance as three separate problems. I build them into the same Terraform, the same pipelines, and the same alerts.</p>
+    </div>
+
+    <div class="pillars">
+      <article class="pillar reveal" style="--i:0">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M4 16a8 8 0 1 1 16 0"/><path pathLength="1" d="M12 16l4.5-5"/><circle pathLength="1" cx="12" cy="16" r="1.2"/></svg></div>
+        <h3>Reliability engineering</h3>
+        <p>SLOs that mean something, alerting that fires before customers notice, and recovery that's rehearsed instead of improvised.</p>
+        <ul>
+          <li>SLOs/SLIs for 20+ critical services</li>
+          <li>40% faster incident detection</li>
+          <li>DR playbooks with a 2-hour RTO</li>
+        </ul>
+      </article>
+      <article class="pillar reveal" style="--i:1">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/><path pathLength="1" d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Shift-left security</h3>
+        <p>Security scanning and secrets management built into CI/CD, so problems are caught at the pull request, not in production.</p>
+        <ul>
+          <li>40+ security controls in IaC pipelines</li>
+          <li>Hardcoded credentials eliminated</li>
+          <li>Snyk, Wiz, and HashiCorp Vault</li>
+        </ul>
+      </article>
+      <article class="pillar reveal" style="--i:2">
+        <div class="pillar-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M9 4h6v3H9z"/><path pathLength="1" d="M15 5.5h3v15H6v-15h3"/><path pathLength="1" d="M9 13l2 2 4-4"/></svg></div>
+        <h3>Compliance as code</h3>
+        <p>Policy-as-code Terraform modules for PCI DSS environments, so audit evidence is a by-product of shipping, not a yearly scramble.</p>
+        <ul>
+          <li>100% compliance, 3 audit cycles running</li>
+          <li>75% faster provisioning</li>
+          <li>500+ endpoints under continuous monitoring</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CASE STUDIES ================= -->
+<section id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label"><b>04</b> Selected work</span>
+      <h2 id="work-title">The patterns I run in production, open-sourced.</h2>
+      <p>Each one comes from the portfolio repository, with the code there to read.</p>
+    </div>
+    <div class="swipe-hint label" aria-hidden="true"><span id="case-count">1 / 3</span><span>swipe →</span></div>
+
+    <div class="cases">
+      <article class="case reveal tilt" style="--i:0">
+        <div class="pipe-wrap">
+          <span class="label">pipeline</span>
+          <span class="passed">✓ passed</span>
+          <div class="pipe" aria-hidden="true">
+            <div class="node" style="--n:0"><b>1</b><span>Secrets<br>Gitleaks</span></div>
+            <div class="node" style="--n:1"><b>2</b><span>SAST<br>Snyk</span></div>
+            <div class="node" style="--n:2"><b>3</b><span>Image<br>Trivy</span></div>
+            <div class="node" style="--n:3"><b>4</b><span>IaC<br>Checkov</span></div>
+          </div>
+        </div>
+        <div class="case-body">
+          <h3>DevSecOps Security Pipeline</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Security checks that run too late, after insecure code is already on its way out.</dd></div>
+            <div><dt>Approach</dt><dd>A four-gate GitHub Actions pipeline: secrets, SAST and dependencies, containers, then IaC policy.</dd></div>
+            <div><dt>Result</dt><dd>Insecure code is stopped before it reaches production.</dd></div>
+          </dl>
+          <a class="case-link" href="https://github.com/espnguy/portfolio/tree/main/08-devsecops-pipeline">View code <span class="arrow">↗</span></a>
+        </div>
+      </article>
+
+      <article class="case reveal tilt" style="--i:1">
+        <div class="pipe-wrap">
+          <span class="label">pipeline</span>
+          <span class="passed">✓ passed</span>
+          <div class="pipe" aria-hidden="true">
+            <div class="node" style="--n:0"><b>1</b><span>Push<br>CI</span></div>
+            <div class="node" style="--n:1"><b>2</b><span>Scan<br>Checkov</span></div>
+            <div class="node" style="--n:2"><b>3</b><span>Policy<br>OPA</span></div>
+            <div class="node" style="--n:3"><b>4</b><span>Evidence<br>PCI v4</span></div>
+          </div>
+        </div>
+        <div class="case-body">
+          <h3>PCI DSS Compliance-as-Code</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Audit evidence scrambled together once a year.</dd></div>
+            <div><dt>Approach</dt><dd>Checkov and OPA/Conftest checks mapped to PCI DSS v4.0 controls, wired into CI/CD.</dd></div>
+            <div><dt>Result</dt><dd>Audit evidence generated on every push.</dd></div>
+          </dl>
+          <a class="case-link" href="https://github.com/espnguy/portfolio/tree/main/11-pci-compliance">View code <span class="arrow">↗</span></a>
+        </div>
+      </article>
+
+      <article class="case reveal tilt" style="--i:2">
+        <div class="pipe-wrap">
+          <span class="label">signal path</span>
+          <span class="passed">✓ healthy</span>
+          <div class="pipe" aria-hidden="true">
+            <div class="node" style="--n:0"><b>1</b><span>App<br>Flask</span></div>
+            <div class="node" style="--n:1"><b>2</b><span>Metrics<br>Prom</span></div>
+            <div class="node" style="--n:2"><b>3</b><span>Dash<br>Grafana</span></div>
+            <div class="node" style="--n:3"><b>4</b><span>Alerts<br>SLO</span></div>
+          </div>
+        </div>
+        <div class="case-body">
+          <h3>Observability Stack</h3>
+          <dl>
+            <div><dt>Problem</dt><dd>Customers finding problems before the monitoring does.</dd></div>
+            <div><dt>Approach</dt><dd>A fully instrumented Flask service with Prometheus metrics and Grafana alerting tied to SLO thresholds.</dd></div>
+            <div><dt>Result</dt><dd>The same alerting pattern I run in production.</dd></div>
+          </dl>
+          <a class="case-link" href="https://github.com/espnguy/portfolio/tree/main/09-observability">View code <span class="arrow">↗</span></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NOTE ================= -->
+<section id="note" aria-labelledby="note-title">
+  <div class="wrap note-grid">
+    <div class="section-head reveal">
+      <span class="label"><b>05</b> A note from Mustafa</span>
+      <h2 id="note-title">Why I build it this way.</h2>
+    </div>
+
+    <figure class="note reveal">
+      <div class="note-body">
+        <p>I didn't start in engineering. I started on a retail floor, running a 20-person team at Best Buy, and in 2013 I took a technical support job at Global Payments.</p>
+        <p>Over the next thirteen years I moved through account management, data analysis and DevOps before landing in DevSecOps. Every step started with someone trusting me with more than my title.</p>
+        <p>That path shapes how I work. I've been the person on the phone when a system goes down, so I build infrastructure that keeps anyone from sitting in that seat. And I treat audit evidence as something the pipeline should produce, not something a team scrambles for once a year.</p>
+      </div>
+      <figcaption class="note-sign">
+        <span class="monogram" aria-hidden="true">MS</span>
+        <span><strong>Mustafa F. Sunka</strong><span class="label">Senior DevSecOps Engineer · Frisco, TX</span></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= CAREER ================= -->
+<section id="career" aria-labelledby="career-title">
+  <div class="wrap career-grid">
+    <div class="career-intro reveal">
+      <div class="section-head">
+        <span class="label"><b>06</b> Career path</span>
+        <h2 id="career-title">One company, five roles.</h2>
+        <p>From the support desk to senior DevSecOps. Every promotion came from the trust built in the role before it.</p>
+      </div>
+      <div class="big">13<em>years</em></div>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <span class="fill" aria-hidden="true"></span>
+
+      <article class="t-item current">
+        <div class="t-ver">v5 · <em>current</em> · at Global Payments since Feb 2013</div>
+        <h3>Senior DevSecOps Engineer</h3>
+        <div class="org">Global Payments · Dallas, TX</div>
         <ul>
           <li>Defined and enforced SLOs/SLIs for 20+ critical services across AWS, Azure, and GCP, holding 99.9% availability.</li>
           <li>Led incident detection and root-cause analysis for a high-throughput production platform, cutting mean time to detect by 40%.</li>
           <li>Engineered reusable, policy-as-code Terraform modules that cut deployment cycle time by 75%.</li>
-          <li>Built disaster recovery playbooks with a 2-hour RTO, cutting mean time to recover by 65%.</li>
-          <li>Embedded security scanning and secrets management into CI/CD, eliminating hardcoded credentials across every environment.</li>
-          <li>Mentored four junior engineers — one internal promotion, 30% faster onboarding for new hires.</li>
+          <li class="more">Built disaster recovery playbooks with a 2-hour RTO, cutting mean time to recover by 65%.</li>
+          <li class="more">Embedded security scanning and secrets management into CI/CD, eliminating hardcoded credentials across every environment.</li>
+          <li class="more">Mentored four junior engineers: one internal promotion, 30% faster onboarding for new hires.</li>
         </ul>
-        <p class="entry-note">Five roles at Global Payments: Technical Support Representative → Account Manager → Data Analyst → DevOps Engineer → Senior DevSecOps Engineer.</p>
-      </div>
-    </article>
+        <button class="more-btn" type="button" aria-expanded="false">Show 3 more</button>
+      </article>
 
-    <article class="entry">
-      <div class="entry-time">2005 —<br>2013</div>
-      <div class="entry-body">
-        <h3>Operations Manager <span class="entry-org">· Best Buy, Hammond, LA</span></h3>
+      <article class="t-item">
+        <div class="t-ver">v4</div>
+        <h3>DevOps Engineer</h3>
+        <div class="org">Global Payments</div>
+      </article>
+      <article class="t-item">
+        <div class="t-ver">v3</div>
+        <h3>Data Analyst</h3>
+        <div class="org">Global Payments</div>
+      </article>
+      <article class="t-item">
+        <div class="t-ver">v2</div>
+        <h3>Account Manager</h3>
+        <div class="org">Global Payments</div>
+      </article>
+      <article class="t-item">
+        <div class="t-ver">v1 · 2013</div>
+        <h3>Technical Support Representative</h3>
+        <div class="org">Global Payments</div>
+      </article>
+
+      <article class="t-item t-earlier">
+        <div class="t-ver">earlier · 2005 — 2013</div>
+        <h3>Operations Manager</h3>
+        <div class="org">Best Buy · Hammond, LA. Ran a 20-person team at a $10M+ location and lifted customer satisfaction 18%.</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STACK ================= -->
+<section id="stack" aria-labelledby="stack-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label"><b>07</b> Stack</span>
+      <h2 id="stack-title">Tools I run in production.</h2>
+    </div>
+
+    <div class="chips reveal" role="group" aria-label="Filter tools by category">
+      <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+      <button class="chip" type="button" data-filter="cloud" aria-pressed="false">Cloud</button>
+      <button class="chip" type="button" data-filter="sre" aria-pressed="false">SRE</button>
+      <button class="chip" type="button" data-filter="iac" aria-pressed="false">IaC &amp; Automation</button>
+      <button class="chip" type="button" data-filter="cicd" aria-pressed="false">Containers &amp; CI/CD</button>
+      <button class="chip" type="button" data-filter="obs" aria-pressed="false">Observability</button>
+      <button class="chip" type="button" data-filter="sec" aria-pressed="false">Security</button>
+    </div>
+
+    <div class="tags pre" id="tags">
+      <span class="tag-item" data-cat="cloud">AWS</span>
+      <span class="tag-item" data-cat="cloud">Azure</span>
+      <span class="tag-item" data-cat="cloud">Google Cloud</span>
+      <span class="tag-item" data-cat="sre">SLO / SLI</span>
+      <span class="tag-item" data-cat="sre">Incident Management</span>
+      <span class="tag-item" data-cat="sre">Root Cause Analysis</span>
+      <span class="tag-item" data-cat="sre">Disaster Recovery</span>
+      <span class="tag-item" data-cat="sre">Chaos Engineering</span>
+      <span class="tag-item" data-cat="sre">Runbook Authoring</span>
+      <span class="tag-item" data-cat="iac">Terraform</span>
+      <span class="tag-item" data-cat="iac">ARM Templates</span>
+      <span class="tag-item" data-cat="iac">Ansible</span>
+      <span class="tag-item" data-cat="iac">PowerShell</span>
+      <span class="tag-item" data-cat="iac">Python</span>
+      <span class="tag-item" data-cat="iac">Bash</span>
+      <span class="tag-item" data-cat="cicd">Kubernetes (GKE)</span>
+      <span class="tag-item" data-cat="cicd">Docker</span>
+      <span class="tag-item" data-cat="cicd">Jenkins</span>
+      <span class="tag-item" data-cat="cicd">Azure DevOps</span>
+      <span class="tag-item" data-cat="cicd">Git / GitHub</span>
+      <span class="tag-item" data-cat="obs">Splunk</span>
+      <span class="tag-item" data-cat="obs">LogicMonitor</span>
+      <span class="tag-item" data-cat="obs">ThousandEyes</span>
+      <span class="tag-item" data-cat="obs">Application Insights</span>
+      <span class="tag-item" data-cat="obs">CloudWatch</span>
+      <span class="tag-item" data-cat="obs">Prometheus / Grafana</span>
+      <span class="tag-item" data-cat="sec">Snyk</span>
+      <span class="tag-item" data-cat="sec">Wiz</span>
+      <span class="tag-item" data-cat="sec">HashiCorp Vault</span>
+      <span class="tag-item" data-cat="sec">PCI DSS</span>
+      <span class="tag-item" data-cat="sec">Azure Key Vault</span>
+      <span class="tag-item" data-cat="sec">GCP Secret Manager</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CREDENTIALS ================= -->
+<section id="creds" aria-labelledby="creds-title">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="label"><b>08</b> Credentials</span>
+      <h2 id="creds-title">Certified, educated, recognized.</h2>
+    </div>
+    <div class="creds-grid">
+      <div class="cred reveal" style="--i:0">
+        <h3 class="label">Certifications</h3>
         <ul>
-          <li>Ran a 20-person team at a $10M+ revenue location, lifting customer satisfaction 18% while cutting attrition.</li>
+          <li><strong>Microsoft Certified: Azure Administrator Associate</strong></li>
+          <li><strong>Microsoft Azure Fundamentals</strong></li>
+          <li><strong>Google Cloud Foundational</strong></li>
+          <li><strong>SAS Institute Graduate Certificate</strong>Business Intelligence &amp; Data Mining</li>
         </ul>
       </div>
-    </article>
-  </section>
-
-  <section class="stack">
-    <h2 class="section-head">Skills</h2>
-    <span class="section-kicker">Tools and platforms, by category</span>
-
-    <div class="skills-grid">
-      <div class="stack-row">
-        <div class="stack-label-row">
-          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.6-7.96 5 5 0 0 1 9.6-1.54A4.5 4.5 0 0 1 17.5 18H7z"/></svg>
-          <span class="stack-cat">Cloud</span>
-        </div>
-        <div class="stack-items">AWS<span class="sep">·</span>Azure<span class="sep">·</span>Google Cloud</div>
+      <div class="cred reveal" style="--i:1">
+        <h3 class="label">Education</h3>
+        <ul>
+          <li><strong>M.S., Information Technology Management</strong>University of Texas at Dallas · 2018</li>
+          <li><strong>B.A., Mass Communication</strong>Louisiana State University · 2010</li>
+        </ul>
       </div>
-      <div class="stack-row">
-        <div class="stack-label-row">
-          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l4-5"/><circle cx="12" cy="15" r="1"/></svg>
-          <span class="stack-cat">SRE &amp; Reliability</span>
-        </div>
-        <div class="stack-items">SLO/SLI<span class="sep">·</span>Incident Management<span class="sep">·</span>Root Cause Analysis<span class="sep">·</span>Disaster Recovery<span class="sep">·</span>Chaos Engineering<span class="sep">·</span>Runbook Authoring</div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-label-row">
-          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>
-          <span class="stack-cat">IaC &amp; Automation</span>
-        </div>
-        <div class="stack-items">Terraform<span class="sep">·</span>ARM Templates<span class="sep">·</span>Ansible<span class="sep">·</span>PowerShell<span class="sep">·</span>Python<span class="sep">·</span>Bash</div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-label-row">
-          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3"/><path d="M20 12a8 8 0 0 1-14 5.3"/><path d="M16 4v3.3h-3.3"/><path d="M8 20v-3.3h3.3"/></svg>
-          <span class="stack-cat">Containers &amp; CI/CD</span>
-        </div>
-        <div class="stack-items">Kubernetes (GKE)<span class="sep">·</span>Docker<span class="sep">·</span>Jenkins<span class="sep">·</span>Azure DevOps<span class="sep">·</span>Git / GitHub</div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-label-row">
-          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 16.5l4.5-6 4 3.5 5-8 3.5 4.5"/></svg>
-          <span class="stack-cat">Observability</span>
-        </div>
-        <div class="stack-items">Splunk<span class="sep">·</span>LogicMonitor<span class="sep">·</span>ThousandEyes<span class="sep">·</span>Application Insights<span class="sep">·</span>CloudWatch<span class="sep">·</span>Prometheus / Grafana</div>
-      </div>
-      <div class="stack-row">
-        <div class="stack-label-row">
-          <svg class="stack-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V6l7-3z"/></svg>
-          <span class="stack-cat">Security &amp; Compliance</span>
-        </div>
-        <div class="stack-items">Snyk<span class="sep">·</span>Wiz<span class="sep">·</span>HashiCorp Vault<span class="sep">·</span>PCI DSS<span class="sep">·</span>Azure Key Vault<span class="sep">·</span>GCP Secret Manager</div>
+      <div class="cred award reveal" style="--i:2">
+        <h3 class="label">2020 Company Award</h3>
+        <div class="badge"><img src="/coe-logo.png" width="387" height="150" loading="lazy" decoding="async" alt="Global Payments Circle of Excellence award, 2020"></div>
+        <blockquote>"Recognized for building resilient, observable infrastructure at scale."</blockquote>
+        <div class="src label">Circle of Excellence · Global Payments</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="creds">
-    <div class="creds-col">
-      <h2 class="section-head" style="text-align:left; font-size:1.15rem;">Certifications</h2>
-      <ul>
-        <li><strong>Microsoft Certified: Azure Administrator Associate</strong></li>
-        <li><strong>Microsoft Azure Fundamentals</strong></li>
-        <li><strong>Google Cloud Foundational</strong></li>
-        <li><strong>SAS Institute Graduate Certificate</strong>Business Intelligence &amp; Data Mining</li>
+<!-- ================= ANSWERS ================= -->
+<section id="answers" aria-labelledby="answers-title">
+  <div class="wrap answers-grid">
+    <div class="answers-intro section-head reveal">
+      <span class="label"><b>09</b> Answers</span>
+      <h2 id="answers-title">Questions hiring teams ask me.</h2>
+      <p>The honest answers, before you have to ask.</p>
+    </div>
+
+    <div class="qa-list reveal">
+      <details class="qa" name="faq">
+        <summary>Thirteen years at one company. Can you adapt somewhere new?<i aria-hidden="true"></i></summary>
+        <div class="a"><p>It's been five different jobs, not one. Each role brought new tools, new teams and new stakeholders: support, accounts, data, DevOps, then DevSecOps. The infrastructure itself spans AWS, Azure and GCP, so I'm used to working across platforms rather than inside one.</p></div>
+      </details>
+      <details class="qa" name="faq">
+        <summary>Are the numbers on this page real?<i aria-hidden="true"></i></summary>
+        <div class="a"><p>Yes. They come from production systems at Global Payments, and they match my résumé. Pick any one and I'll walk you through how it was measured and what changed to move it.</p></div>
+      </details>
+      <details class="qa" name="faq">
+        <summary>Are you hands-on, or do you mostly manage?<i aria-hidden="true"></i></summary>
+        <div class="a"><p>Hands-on. I write the Terraform modules, build the pipelines and work the incidents. The <a href="https://github.com/espnguy/portfolio">portfolio repository</a> has 13 projects you can read today. I've also mentored four junior engineers, so I can lead without leaving the keyboard.</p></div>
+      </details>
+      <details class="qa" name="faq">
+        <summary>Can you work in a regulated environment?<i aria-hidden="true"></i></summary>
+        <div class="a"><p>It's the environment I work in now: PCI DSS payment infrastructure, with compliance held across three straight audit cycles. <a href="https://github.com/espnguy/portfolio/tree/main/11-pci-compliance">Compliance-as-code</a> is one of the public projects.</p></div>
+      </details>
+      <details class="qa" name="faq">
+        <summary>Your degree is in mass communication. Is the technical foundation there?<i aria-hidden="true"></i></summary>
+        <div class="a"><p>I followed the B.A. from LSU with an M.S. in Information Technology Management from UT Dallas, Microsoft and Google Cloud certifications, and years of production work on top. The communication background shows up in clear runbooks and incident write-ups.</p></div>
+      </details>
+      <details class="qa" name="faq">
+        <summary>How quickly can we talk?<i aria-hidden="true"></i></summary>
+        <div class="a"><p>Within one business day. Email is fastest; <a href="https://www.linkedin.com/in/mustafa-sunka/">LinkedIn</a> works too.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <span class="status-pill"><span class="dot"></span>Accepting conversations</span>
+      <h2 id="contact-title">Need someone who's already done this at payment scale?</h2>
+      <p><strong>Let's talk.</strong> Send a role, a problem, or just a hello.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary magnetic js-email" href="#contact">Email me <span class="arrow">→</span></a>
+        <button class="btn btn-ghost copy-btn" type="button" hidden>Copy email address</button>
+        <a class="btn btn-ghost" href="/resume.pdf" download>Résumé <span class="arrow down">↓</span></a>
+      </div>
+      <ul class="promises" aria-label="My commitments">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>A reply within one business day</strong>Email or LinkedIn, either works.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Every number, explained</strong>Ask about any metric and I'll show how it was measured.</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Work you can check first</strong>The code is public. Read it before we talk.</span></li>
       </ul>
+      <div class="cta-links">
+        <a href="https://www.linkedin.com/in/mustafa-sunka/">LinkedIn ↗</a>
+        <a href="https://github.com/espnguy">GitHub ↗</a>
+        <a href="https://github.com/espnguy/portfolio">Portfolio repo ↗</a>
+      </div>
     </div>
-    <div class="creds-col">
-      <h2 class="section-head" style="text-align:left; font-size:1.15rem;">Education</h2>
-      <ul>
-        <li><strong>M.S., Information Technology Management</strong>University of Texas at Dallas — 2018</li>
-        <li><strong>B.A., Mass Communication</strong>Louisiana State University — 2010</li>
-      </ul>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="contact">
-    <span class="award-label">2020 Company Award</span>
-    <div class="badge"><img src="/coe-logo.png" alt="Global Payments Circle of Excellence award, 2020"></div>
-    <p class="quote">"Recognized for building resilient, observable infrastructure at scale."</p>
-    <div class="contact-line">
-      Frisco, TX<span class="sep">·</span><button type="button" class="contact-btn" data-reveal="MjI1LTc0Ny01NzAz" data-label="Call">Call</button><span class="sep">·</span><button type="button" class="contact-btn" data-reveal="bXN1bmthQG1lLmNvbQ==" data-label="Email">Email</button>
-    </div>
-    <div class="footer-ctas">
-      <a class="btn btn-primary" href="https://github.com/espnguy/portfolio">Portfolio ↗</a>
-      <a class="btn btn-ghost" href="https://github.com/espnguy">GitHub ↗</a>
-    </div>
-  </footer>
+</main>
 
-  <section class="work">
-    <h2 class="section-head">Selected Work</h2>
-    <span class="section-kicker">From the portfolio repository</span>
-
-    <div class="work-item">
-      <h3><a href="https://github.com/espnguy/portfolio/tree/main/08-devsecops-pipeline">DevSecOps Security Pipeline</a></h3>
-      <p>A four-gate GitHub Actions pipeline — secrets scanning, SAST, dependency checks, and policy enforcement — that stops insecure code before it reaches production.</p>
-    </div>
-    <div class="work-item">
-      <h3><a href="https://github.com/espnguy/portfolio/tree/main/11-pci-compliance">PCI DSS Compliance-as-Code</a></h3>
-      <p>Automated PCI DSS v4.0 scanning with Checkov and OPA, wired into CI/CD so audit evidence is generated on every push instead of scrambled together once a year.</p>
-    </div>
-    <div class="work-item">
-      <h3><a href="https://github.com/espnguy/portfolio/tree/main/09-observability">Observability Stack — Prometheus + Grafana</a></h3>
-      <p>A fully instrumented Flask service with Prometheus metrics and Grafana alerting tied to SLO thresholds — the same pattern I run in production.</p>
-    </div>
-  </section>
-
+<!-- phone-only action bar: sits in the thumb zone once the hero buttons scroll away -->
+<div class="mbar" id="mbar" role="region" aria-label="Quick actions">
+  <a class="btn btn-primary js-email" href="#contact">Email me <span class="arrow">→</span></a>
+  <a class="btn btn-ghost" href="/resume.pdf" download>Résumé <span class="arrow down">↓</span></a>
 </div>
 
+<footer>
+  <div class="wrap">
+    <span class="status"><span class="dot"></span>all systems operational</span>
+    <span>© <span id="yr">2026</span> Mustafa F. Sunka · Frisco, TX</span>
+    <nav aria-label="Social">
+      <a href="https://www.linkedin.com/in/mustafa-sunka/">LinkedIn</a>
+      <a href="https://github.com/espnguy">GitHub</a>
+      <a href="#top">Top ↑</a>
+    </nav>
+  </div>
+</footer>
+
 <script>
-  document.querySelectorAll("[data-reveal]").forEach(function (el) {
-    el.addEventListener("click", function () {
-      el.textContent = atob(el.dataset.reveal);
-      el.classList.add("contact-btn-revealed");
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(pointer: fine)").matches;
+  var t0 = performance.now();
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ---------- email: assembled at runtime to keep scrapers off it ---------- */
+  var email = ["msunka", ["me", "com"].join(".")].join("@");
+  document.querySelectorAll(".js-email").forEach(function (a) { a.href = "mailto:" + email; });
+  var copyBtn = document.querySelector(".copy-btn");
+  copyBtn.hidden = false;
+  copyBtn.addEventListener("click", function () {
+    var done = function () {
+      copyBtn.textContent = "Copied ✓";
+      copyBtn.classList.add("copied");
+      setTimeout(function () { copyBtn.textContent = "Copy email address"; copyBtn.classList.remove("copied"); }, 2200);
+    };
+    try {
+      navigator.clipboard.writeText(email).then(done, function () { copyBtn.textContent = email; });
+    } catch (e) { copyBtn.textContent = email; }
+  });
+
+  /* ---------- theme toggle ---------- */
+  document.querySelector(".theme-toggle").addEventListener("click", function () {
+    var current = root.dataset.theme ||
+      (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    var next = current === "light" ? "dark" : "light";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  /* ---------- mobile menu ---------- */
+  var menuBtn = document.querySelector(".menu-btn");
+  var links = document.getElementById("nav-links");
+  function setMenu(open) {
+    links.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  menuBtn.addEventListener("click", function () { setMenu(!links.classList.contains("open")); });
+  links.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+  /* ---------- hero load-in ---------- */
+  function markLoaded() { root.classList.add("loaded"); }
+  requestAnimationFrame(function () { requestAnimationFrame(markLoaded); });
+  setTimeout(markLoaded, 120); // rAF is paused in background tabs
+
+  /* ---------- terminal typing ---------- */
+  var term = document.querySelector(".terminal");
+  var lines = Array.prototype.slice.call(term.querySelectorAll(".tl"));
+  var status = term.querySelector(".term-status");
+  var caret = document.createElement("span");
+  caret.className = "caret";
+
+  function runTerminal() {
+    if (reduce) { status.classList.add("on"); lines[lines.length - 1].appendChild(caret); return; }
+    var texts = lines.map(function (l) { return l.textContent; });
+    lines.forEach(function (l) { l.textContent = ""; l.classList.add("hidden"); });
+    var i = 0;
+    function next() {
+      if (i >= lines.length) { status.classList.add("on"); return; }
+      var el = lines[i], text = texts[i];
+      el.classList.remove("hidden");
+      if (el.classList.contains("cmd")) {
+        var c = 0;
+        (function type() {
+          if (c <= text.length) {
+            el.textContent = text.slice(0, c);
+            el.appendChild(caret);
+            c++;
+            setTimeout(type, 26 + Math.random() * 34);
+          } else { i++; setTimeout(next, 340); }
+        })();
+      } else {
+        el.textContent = text;
+        if (i === lines.length - 1) el.appendChild(caret);
+        i++;
+        setTimeout(next, el.classList.contains("gap") ? 60 : 200);
+      }
+    }
+    next();
+  }
+
+  var termIO = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) { termIO.disconnect(); setTimeout(runTerminal, 1000); }
+  }, { threshold: 0.3 });
+  termIO.observe(term);
+
+  /* ---------- counters ---------- */
+  function countUp(el) {
+    var target = parseFloat(el.dataset.count);
+    var dec = parseInt(el.dataset.decimals || "0", 10);
+    var suffix = el.dataset.suffix || "";
+    var render = function (v) { el.innerHTML = v.toFixed(dec) + "<em>" + suffix + "</em>"; };
+    if (reduce) { render(target); return; }
+    var start = performance.now(), dur = 1200;
+    (function tick(now) {
+      var p = Math.min((now - start) / dur, 1);
+      render(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(tick);
+    })(start);
+  }
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    var dec = parseInt(el.dataset.decimals || "0", 10);
+    el.innerHTML = (reduce ? parseFloat(el.dataset.count) : 0).toFixed(dec) + "<em>" + (el.dataset.suffix || "") + "</em>";
+  });
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      el.classList.add("in");
+      // hand transitions back to the component (hover states) once the entrance is done
+      setTimeout(function () { el.classList.remove("reveal"); }, 1500);
+      var i = parseInt(el.style.getPropertyValue("--i") || 0, 10) || 0;
+      el.querySelectorAll("[data-count]").forEach(function (n) {
+        setTimeout(function () { countUp(n); }, i * 90 + 150);
+      });
+      io.unobserve(el);
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".reveal").forEach(function (el) { io.observe(el); });
+
+  /* ---------- stack tags: first entry stagger + filter ---------- */
+  var tagsWrap = document.getElementById("tags");
+  var tags = Array.prototype.slice.call(tagsWrap.children);
+  tags.forEach(function (t, i) { t.style.setProperty("--t", i); });
+  var tagIO = new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting) return;
+    tagIO.disconnect();
+    tagsWrap.classList.add("go");
+    requestAnimationFrame(function () { tagsWrap.classList.remove("pre"); });
+    setTimeout(function () { tagsWrap.classList.remove("pre"); }, 100);
+    setTimeout(function () { tagsWrap.classList.remove("go"); }, 1200);
+  }, { threshold: 0.2 });
+  tagIO.observe(tagsWrap);
+
+  document.querySelectorAll(".chip").forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.dataset.filter;
+      document.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c === chip); });
+      tags.forEach(function (t) {
+        var hit = f === "all" || t.dataset.cat === f;
+        t.classList.toggle("dim", !hit);
+        t.classList.toggle("match", hit && f !== "all");
+      });
     });
   });
+
+  /* ---------- scroll-driven: nav, progress, timeline, trace, active link ---------- */
+  var nav = document.getElementById("nav");
+  var bar = document.querySelector(".progress");
+  var timeline = document.getElementById("timeline");
+  var fill = timeline.querySelector(".fill");
+  var items = Array.prototype.slice.call(timeline.querySelectorAll(".t-item"));
+  var navAnchors = Array.prototype.slice.call(document.querySelectorAll(".nav-links a"));
+  var navTargets = navAnchors.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+
+  var trace = document.getElementById("trace");
+  var traceFill = trace.querySelector(".trace-fill");
+  var traceLinks = Array.prototype.slice.call(trace.querySelectorAll("a"));
+  var traceTargets = traceLinks.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  var traceMs = document.getElementById("trace-ms");
+  var ticking = false;
+
+  function onScroll() {
+    var y = window.scrollY, vh = window.innerHeight;
+    var max = document.documentElement.scrollHeight - vh;
+    var progress = max > 0 ? y / max : 0;
+    nav.classList.toggle("scrolled", y > 40);
+    bar.style.transform = "scaleX(" + progress + ")";
+
+    // career timeline
+    var r = timeline.getBoundingClientRect();
+    var p = Math.min(Math.max((vh * 0.65 - r.top) / r.height, 0), 1);
+    fill.style.transform = "scaleY(" + p + ")";
+    var reach = r.top + p * r.height;
+    items.forEach(function (it) {
+      it.classList.toggle("on", reduce || it.getBoundingClientRect().top + 12 <= reach + 1);
+    });
+
+    // nav underline
+    var current = -1;
+    navTargets.forEach(function (s, i) { if (s && s.getBoundingClientRect().top < vh * 0.4) current = i; });
+    navAnchors.forEach(function (a, i) { a.classList.toggle("active", i === current); });
+
+    // signature trace: one span per section, completes with 200 OK at contact
+    var active = 0;
+    traceTargets.forEach(function (s, i) { if (s.getBoundingClientRect().top < vh * 0.45) active = i; });
+    if (progress > 0.985) active = traceLinks.length - 1;
+    traceLinks.forEach(function (a, i) {
+      a.classList.toggle("active", i === active);
+      a.classList.toggle("done", i < active);
+      if (i === active) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+    });
+    traceFill.style.transform = "scaleY(" + (active / (traceLinks.length - 1)) + ")";
+    var complete = active === traceLinks.length - 1;
+    if (complete && !trace.classList.contains("complete")) {
+      traceMs.textContent = ((performance.now() - t0) / 1000).toFixed(1) + "s";
+    }
+    trace.classList.toggle("complete", complete);
+
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+  }, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+
+  /* ---------- hero CTA leaves view: nav CTA pulses once, phone action bar slides up ---------- */
+  var navCta = document.querySelector(".nav-cta");
+  var heroCta = document.querySelector(".hero-ctas");
+  var mbar = document.getElementById("mbar");
+  var pulsed = false, heroGone = false, contactIn = false;
+  function syncBar() { mbar.classList.toggle("show", heroGone && !contactIn); }
+  new IntersectionObserver(function (entries) {
+    var e = entries[0];
+    heroGone = !e.isIntersecting && e.boundingClientRect.top < 0;
+    if (heroGone && !pulsed) { pulsed = true; navCta.classList.add("pulse"); }
+    syncBar();
+  }).observe(heroCta);
+  // the contact panel has the same buttons, so the bar steps aside there
+  new IntersectionObserver(function (entries) {
+    contactIn = entries[0].isIntersecting;
+    syncBar();
+  }, { rootMargin: "0px 0px -20% 0px" }).observe(document.getElementById("contact"));
+
+  /* ---------- career: expand the collapsed bullets on phones ---------- */
+  var moreBtn = document.querySelector(".more-btn");
+  moreBtn.addEventListener("click", function () {
+    var card = moreBtn.closest(".t-item");
+    var open = card.classList.toggle("expanded");
+    moreBtn.setAttribute("aria-expanded", open);
+    moreBtn.textContent = open ? "Show less" : "Show 3 more";
+    onScroll();
+  });
+
+  /* ---------- case studies: swipe position counter ---------- */
+  var casesRow = document.querySelector(".cases");
+  var caseCount = document.getElementById("case-count");
+  casesRow.addEventListener("scroll", function () {
+    var card = casesRow.querySelector(".case");
+    var idx = Math.round(casesRow.scrollLeft / (card.offsetWidth + 12));
+    caseCount.textContent = (Math.min(idx, 2) + 1) + " / 3";
+  }, { passive: true });
+
+  /* ---------- pointer effects (desktop only) ---------- */
+  if (finePointer && !reduce) {
+    document.querySelectorAll(".magnetic").forEach(function (btn) {
+      btn.addEventListener("pointermove", function (e) {
+        var b = btn.getBoundingClientRect();
+        var dx = e.clientX - (b.left + b.width / 2);
+        var dy = e.clientY - (b.top + b.height / 2);
+        btn.style.transform = "translate(" + dx * 0.2 + "px," + dy * 0.3 + "px)";
+      });
+      btn.addEventListener("pointerleave", function () { btn.style.transform = ""; });
+    });
+
+    document.querySelectorAll(".tilt").forEach(function (card) {
+      card.addEventListener("pointermove", function (e) {
+        if (!card.classList.contains("in")) return;
+        var b = card.getBoundingClientRect();
+        var px = (e.clientX - b.left) / b.width - 0.5;
+        var py = (e.clientY - b.top) / b.height - 0.5;
+        card.style.transition = "border-color .3s, box-shadow .4s";
+        card.style.transform = "rotateX(" + (-py * 5) + "deg) rotateY(" + (px * 5) + "deg) translateY(-4px)";
+      });
+      card.addEventListener("pointerleave", function () {
+        card.style.transition = "";
+        card.style.transform = "";
+      });
+    });
+  }
+})();
 </script>
+</body>
+</html>
