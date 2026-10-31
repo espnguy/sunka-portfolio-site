@@ -1207,6 +1207,66 @@
     .stat + .stat { border-top: 1px solid var(--line); }
   }
 
+  /* ================= fold screens (~600-1000px: iPhone Duo inner screen, small tablets) ================= */
+  @media (min-width: 600px) and (max-width: 1000px) {
+    /* safe-area: keep gutters clear of the hinge side and rounded corners */
+    .wrap,
+    .nav-links {
+      padding-left: max(var(--gutter), env(safe-area-inset-left));
+      padding-right: max(var(--gutter), env(safe-area-inset-right));
+    }
+    .mbar {
+      padding-left: max(var(--gutter), env(safe-area-inset-left));
+      padding-right: max(var(--gutter), env(safe-area-inset-right));
+    }
+
+    /* tap targets: 44px minimum */
+    .icon-btn { width: 44px; height: 44px; }
+    .logo, .nav-cta { min-height: 44px; }
+    .nav-links a { display: flex; align-items: center; min-height: 44px; }
+    .chip { min-height: 44px; }
+    .case-link { min-height: 44px; }
+    .cta-links a, footer nav a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; }
+    .proof-item a { display: inline-block; padding: 14px 0; margin: -14px 0; }
+    .qa .a a { padding-block: 12px; } /* inline links: taller hit area, line layout unchanged */
+
+    /* two panes: list on the left, detail on the right */
+    .note-grid, .answers-grid, .career-grid {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.5fr);
+      gap: var(--s5);
+    }
+    .career-intro, .answers-intro { position: sticky; top: calc(var(--nav-h) + var(--s3)); }
+    .career-intro .big { font-size: 4rem; }
+
+    #stack .wrap {
+      display: grid;
+      grid-template-columns: minmax(170px, 0.55fr) minmax(0, 1.5fr);
+      column-gap: var(--s5);
+      align-items: start;
+    }
+    #stack .section-head { grid-column: 1 / -1; }
+    .chips {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      overflow: visible;
+      margin: 0;
+      padding: 0;
+      position: sticky;
+      top: calc(var(--nav-h) + var(--s3));
+    }
+    .chip { text-align: left; }
+  }
+
+  /* landscape fold: hero text and terminal share the screen */
+  @media (min-width: 820px) and (max-width: 1000px) and (orientation: landscape) {
+    .hero { padding: calc(var(--nav-h) + var(--s4)) 0 var(--s5); }
+    .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr); gap: var(--s4); }
+    .hero h1 { font-size: clamp(2rem, 3.9vw, 2.5rem); margin: var(--s2) 0; }
+    .hero .sub { font-size: 1rem; margin-bottom: var(--s3); }
+    .hero .terminal { font-size: 0.75rem; }
+  }
+
   /* ================= reduced motion ================= */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

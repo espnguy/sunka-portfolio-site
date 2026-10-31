@@ -1,0 +1,59 @@
+PASS  382x580  no-sideways  
+PASS  669x825  no-sideways  
+FAIL  669x825  tap-44       24 issue(s)
+        - (menu) button "Close menu" 40x40
+        - a "Compliance-as-code" 170x20
+        - a "Get in touch" 120x38
+        - a "GitHub ↗" 60x27
+        - a "GitHub" 43x20
+        - a "LinkedIn ↗" 70x27
+        - ...and 18 more
+FAIL  669x825  two-panes    4 issue(s)
+        - note: stacked (list 605w, detail starts 167px below)
+        - career: stacked (list 605w, detail starts 285px below)
+        - stack: stacked (list 605w, detail starts 116px below)
+        - answers: stacked (list 605w, detail starts 149px below)
+PASS  669x825  not-covered  
+FAIL  669x825  safe-area    2 issue(s)
+        - no safe-area-inset-left in .wrap padding
+        - no safe-area-inset-right in .wrap padding
+PASS  870x669  no-sideways  
+FAIL  870x669  tap-44       27 issue(s)
+        - a "Career" 69x40
+        - a "Compliance-as-code" 170x20
+        - a "Contact" 76x40
+        - a "Get in touch" 120x38
+        - a "GitHub ↗" 60x27
+        - a "GitHub" 43x20
+        - ...and 21 more
+FAIL  870x669  two-panes    4 issue(s)
+        - note: stacked (list 760w, detail starts 170px below)
+        - career: stacked (list 806w, detail starts 293px below)
+        - stack: stacked (list 806w, detail starts 70px below)
+        - answers: stacked (list 760w, detail starts 152px below)
+PASS  870x669  not-covered  
+FAIL  870x669  safe-area    2 issue(s)
+        - no safe-area-inset-left in .wrap padding
+        - no safe-area-inset-right in .wrap padding
+PASS  951x543  no-sideways  
+FAIL  951x543  tap-44       27 issue(s)
+        - a "Career" 69x40
+        - a "Compliance-as-code" 170x20
+        - a "Contact" 76x40
+        - a "Get in touch" 120x38
+        - a "GitHub ↗" 60x27
+        - a "GitHub" 43x20
+        - ...and 21 more
+FAIL  951x543  two-panes    4 issue(s)
+        - note: stacked (list 760w, detail starts 173px below)
+        - career: stacked (list 887w, detail starts 303px below)
+        - stack: stacked (list 887w, detail starts 70px below)
+        - answers: stacked (list 760w, detail starts 156px below)
+PASS  951x543  not-covered  
+FAIL  951x543  safe-area    2 issue(s)
+        - no safe-area-inset-left in .wrap padding
+        - no safe-area-inset-right in .wrap padding
+PASS  390x844  no-sideways  
+PASS  1440x900  no-sideways  
+
+FAILED: 9 rule check(s) failing

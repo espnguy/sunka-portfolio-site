@@ -1,0 +1,20 @@
+PASS  382x580  no-sideways  
+PASS  669x825  no-sideways  
+PASS  669x825  tap-44       
+PASS  669x825  two-panes    
+PASS  669x825  not-covered  
+PASS  669x825  safe-area    
+PASS  870x669  no-sideways  
+PASS  870x669  tap-44       
+PASS  870x669  two-panes    
+PASS  870x669  not-covered  
+PASS  870x669  safe-area    
+PASS  951x543  no-sideways  
+PASS  951x543  tap-44       
+PASS  951x543  two-panes    
+PASS  951x543  not-covered  
+PASS  951x543  safe-area    
+PASS  390x844  no-sideways  
+PASS  1440x900  no-sideways  
+
+ALL PASSED: 0 rule check(s) failing
